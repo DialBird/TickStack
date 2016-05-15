@@ -105,7 +105,7 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
             //新しいTaskCellData
             let newTaskCellData = TaskCellData()
             newTaskCellData.taskName = newTaskNameTextField.text!
-            newTaskCellData.taskGoalMinute = selectedMinute
+            newTaskCellData.taskGoalMinute = Int(timeTextField.text!)!
             //新しいtaskDataSource
             let newTaskDataSource = TaskDataSource()
             newTaskDataSource.taskName = newTaskNameTextField.text!

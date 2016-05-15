@@ -53,7 +53,7 @@ class TaskCell: UITableViewCell {
         }
         
         //TaskCellDataに溜まった秒数をリセットする
-        taskData.todayTimeStock = 0
+        taskData.todaySecondStock = 0
     }
     
 }

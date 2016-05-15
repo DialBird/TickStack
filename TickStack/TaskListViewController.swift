@@ -58,15 +58,13 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
         //もし日にちが登録されていて、日付が変わっていたら更新
         if let lastDay = realm.objects(LastDay).first {
             //最後に開いた瞬間から１日以上経っているか
-            if NSDate().timeIntervalSinceDate(lastDay.date) > 30{
-                resetTable()
-                return
+            if NSDate().timeIntervalSinceDate(lastDay.date) > 10{
+                dayChanged()
             }
             //最後に開いた瞬間と比べて日にちが違うか
             let cal = NSCalendar(identifier: NSCalendarIdentifierGregorian)
             if cal!.component(.Day, fromDate: lastDay.date) != cal!.component(.Day, fromDate: NSDate()){
-                resetTable()
-                return
+                dayChanged()
             }
             //改めて今を登録
             try! realm.write({
@@ -86,7 +84,7 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func updateTable()->Void{
-//        print(realm.objects(TaskCellDataList))
+        print(realm.objects(TaskCellDataList))
 //        print(realm.objects(TaskDataSourceList))
         tableView.setEditing(false, animated: true)
         isInEditMode = false
@@ -94,14 +92,18 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     //日付が変わったと認識されたら発動
-    func resetTable()->Void{
+    func dayChanged()->Void{
         for e in taskCellDataList.list.enumerate(){
             if e.element.isCompleted(){
-                taskDataSourceList.list[e.index].numOfSuccess += 1
+                try! realm.write({
+                    taskDataSourceList.list[e.index].numOfSuccess += 1
+                })
             }
-            e.element.todayTimeStock = 0
+            try! realm.write({
+                taskDataSourceList.list[e.index].numOfPassedDate += 1
+                e.element.todaySecondStock = 0
+            })
         }
-        print("reset")
     }
     
     

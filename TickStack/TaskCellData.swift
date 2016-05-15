@@ -16,7 +16,7 @@ class TaskCellData: Object{
     dynamic var taskName: String = ""
     
     //タスクの目標ゴール時間
-    dynamic var taskGoalMinute = 0
+    dynamic var taskGoalMinute: Int = 0
     
     //目標ゴール時刻を秒に換算して返す
     func getTaskGoalSecond()->Int{
@@ -25,11 +25,11 @@ class TaskCellData: Object{
     }
     
     //現在溜まっている今日１日の時間
-    dynamic var todayTimeStock: Int = 0
+    dynamic var todaySecondStock: Int = 0
     
     //目標達成までの残り時間を返す
     func getRestSecond()->Int{
-        let restTime: Int = max(getTaskGoalSecond() - todayTimeStock, 0)
+        let restTime: Int = max(getTaskGoalSecond() - todaySecondStock, 0)
         return restTime
     }
     
@@ -41,7 +41,7 @@ class TaskCellData: Object{
     
     //今日の目標を達成したかを返す
     func isCompleted()->Bool{
-        if getTaskGoalSecond() <= todayTimeStock{
+        if getTaskGoalSecond() <= todaySecondStock{
             return true
         }else{
             return false

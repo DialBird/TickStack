@@ -24,7 +24,8 @@ class TaskDataSource: Object{
     dynamic var stockedTime: Int = 0
     //達成できた日数
     dynamic var numOfSuccess: Int = 0
-    
+    //経過した日数
+    dynamic var numOfPassedDate: Int = 0
     
     //始めた日からから何日かを返す関数
     func getHowManyDaysHavePassed()->Int{

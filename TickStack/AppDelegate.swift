@@ -24,22 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        //もしすでにtaskCellDataListが入っていたらそれを使う
-//        if let stockedData = realm.objects(TaskCellDataList).first{
-//            taskCellDataList = stockedData
-//        }else{
-//            try! realm.write({
-//                realm.add(taskCellDataList)
-//            })
-//        }
-//        
-//        if let stockedTaskDataSourceList = realm.objects(TaskDataSourceList).first{
-//            taskDataSourceList = stockedTaskDataSourceList
-//        }else{
-//            try! realm.write({
-//                realm.add(taskDataSourceList)
-//            })
-//        }
+        
         
         //realmをリセットする関数
         let realmURL = Realm.Configuration.defaultConfiguration.fileURL!
@@ -62,6 +47,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             realm.deleteAll()
         })
         
+        
+        //もしすでにtaskCellDataListが入っていたらそれを使う
+        if let stockedData = realm.objects(TaskCellDataList).first{
+            taskCellDataList = stockedData
+        }else{
+            try! realm.write({
+                realm.add(taskCellDataList)
+            })
+        }
+        
+        if let stockedTaskDataSourceList = realm.objects(TaskDataSourceList).first{
+            taskDataSourceList = stockedTaskDataSourceList
+        }else{
+            try! realm.write({
+                realm.add(taskDataSourceList)
+            })
+        }
         
         return true
     }
@@ -118,7 +120,8 @@ func convertNSDateIntoCalender(date: NSDate)->String{
 //NSDateから日数さを割り出す
 func getDayGap(firstDate: NSDate, nowDate: NSDate)->Int{
     let span = nowDate.timeIntervalSinceDate(firstDate)
-    return Int(span/60/60/24)
+//    return Int(span/60/60/24)
+    return Int(span/10)
 }
 
 

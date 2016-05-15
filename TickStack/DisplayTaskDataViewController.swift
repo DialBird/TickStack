@@ -36,9 +36,9 @@ class DisplayTaskDataViewController: UIViewController {
         firstDateTextLabel.text = convertNSDateIntoCalender(taskDataSource.firstDay)
         
         //タスクに捧げた時間
-        let gapSeconds: Int = getDayGap(taskDataSource.firstDay, nowDate: NSDate())
-        let gapDate: Int = Int(gapSeconds/60/60/24)
-        totalDevoteDateTextLabel.text = "\(gapDate)日"
+//        let dayGap: Int = getDayGap(taskDataSource.firstDay, nowDate: NSDate())
+//        totalDevoteDateTextLabel.text = "\(dayGap)日"
+        totalDevoteDateTextLabel.text = "\(taskDataSource.numOfPassedDate)日"
         
         //目標通り達成できた日数
         totalSuccessDateTextLabel.text = "\(taskDataSource.numOfSuccess)日"

@@ -46,7 +46,7 @@ class TimerViewController: UIViewController {
         
         
         //残り時間の表示
-        let restSecond: Int = max(taskData.getTaskGoalSecond() - taskData.todayTimeStock,0)
+        let restSecond: Int = taskData.getRestSecond()
         let restTime:(hour: Int, minute: Int, second: Int) = convertSecondIntoTime(restSecond)
         restTimeLabel.text = convertTimeIntoString(restTime.hour, minute: restTime.minute, second: restTime.second)
     }
@@ -58,11 +58,13 @@ class TimerViewController: UIViewController {
         //タイマーを開始
         timerRunning = true
         timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(TimerViewController.update), userInfo: nil, repeats: true)
+        print("timer start")
     }
-    override func viewWillDisappear(animated: Bool) {
+        override func viewWillDisappear(animated: Bool) {
         //タイマーを停止
         timerRunning = false
         timer.invalidate()
+        print("stop timer")
     }
     
     
@@ -71,8 +73,8 @@ class TimerViewController: UIViewController {
         counter += 0.1
         let nowSecond: Int = Int(counter)
        
-        let newCurrentTotalSecond: Int = taskData.todayTimeStock + nowSecond
-        let newRestSecond: Int = taskData.getTaskGoalSecond() - newCurrentTotalSecond
+        let newRestSecond: Int = taskData.getRestSecond() - nowSecond
+        print(newRestSecond)
 
         //経過時間
         let passTime:(hour: Int, minute: Int, second: Int) = convertSecondIntoTime(nowSecond)
@@ -103,7 +105,7 @@ class TimerViewController: UIViewController {
             //時間を更新する
             try! realm.write({
                 //変更を読み込ませるためには、直接dynamicないの変数に記載する必要があり？
-                taskData.todayTimeStock += Int(counter)
+                taskData.todaySecondStock += Int(counter)
                 
                 //データソースの方にも追加
                 let taskDataSource = taskDataSourceList.list[selectedTaskIndex]
