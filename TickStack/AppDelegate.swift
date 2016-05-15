@@ -56,7 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 realm.add(taskCellDataList)
             })
         }
-        
         if let stockedTaskDataSourceList = realm.objects(TaskDataSourceList).first{
             taskDataSourceList = stockedTaskDataSourceList
         }else{
@@ -64,6 +63,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 realm.add(taskDataSourceList)
             })
         }
+        
+        
+        //スリープモードに入らないようにする
+        UIApplication.sharedApplication().idleTimerDisabled = true
         
         return true
     }
