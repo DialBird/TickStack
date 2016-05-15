@@ -16,6 +16,17 @@ let realm = try! Realm()
 var taskCellDataList = TaskCellDataList()
 var taskDataSourceList = TaskDataSourceList()
 
+
+//色のエクステンション
+extension UIColor{
+    class func getCustomBlack()->UIColor{
+        return UIColor(colorLiteralRed: 51/255, green: 51/255, blue: 51/255, alpha: 1)
+    }
+    class func getMainGreen()->UIColor{
+        return UIColor(colorLiteralRed: 129/255, green: 214/255, blue: 116/255, alpha: 1)
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -67,6 +78,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //スリープモードに入らないようにする
         UIApplication.sharedApplication().idleTimerDisabled = true
+        
+        
+        //ナビゲーションバーを編集
+        UINavigationBar.appearance().tintColor = UIColor.blueColor()
+        UINavigationBar.appearance().backgroundColor = UIColor.getMainGreen()
+//        UINavigationBar.appearance().bar
         
         return true
     }
