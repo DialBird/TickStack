@@ -1,0 +1,6 @@
+framework module TPKeyboardAvoidingKit {
+  umbrella header "TPKeyboardAvoidingKit.h"
+
+  export *
+  module * { export * }
+}
