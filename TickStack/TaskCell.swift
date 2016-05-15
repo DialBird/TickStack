@@ -34,12 +34,12 @@ class TaskCell: UITableViewCell {
         //タスク名を表示
         taskNameLabel.text = taskData.taskName
         //タスクの残り時間を表示
-        let time:(hour: Int, minute: Int, second: Int) = convertSecondIntoTime(taskData.getRestTime())
+        let time:(hour: Int, minute: Int, second: Int) = convertSecondIntoTime(taskData.getRestSecond())
         taskRestTimeLabel.text = convertTimeIntoString(time.hour, minute: time.minute, second: time.second)
     }
     
     //日にちが変わった時に起動------------------------------------------------------
-    func changeDate(taskData: TaskCellData){
+    func clearCell(taskData: TaskCellData){
         
         //realmインスタンス
         let realm = try! Realm()

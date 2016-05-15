@@ -20,6 +20,7 @@ class TaskCellData: Object{
     
     //目標ゴール時刻を秒に換算して返す
     func getTaskGoalSecond()->Int{
+        if taskGoalMinute == 1 {return 10}
         return taskGoalMinute*60
     }
     
@@ -27,7 +28,7 @@ class TaskCellData: Object{
     dynamic var todayTimeStock: Int = 0
     
     //目標達成までの残り時間を返す
-    func getRestTime()->Int{
+    func getRestSecond()->Int{
         let restTime: Int = max(getTaskGoalSecond() - todayTimeStock, 0)
         return restTime
     }

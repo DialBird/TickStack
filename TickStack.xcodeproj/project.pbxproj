@@ -10,7 +10,7 @@
 		250783551CDCC84800485CD5 /* CreateNewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250783541CDCC84800485CD5 /* CreateNewTaskViewController.swift */; };
 		2527DA7A1CE84F53002F17B2 /* OriginalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2527DA791CE84F53002F17B2 /* OriginalButton.swift */; };
 		2527DA7C1CE874B2002F17B2 /* ButtonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2527DA7B1CE874B2002F17B2 /* ButtonTest.swift */; };
-		2527DA7E1CE883B4002F17B2 /* Today.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2527DA7D1CE883B4002F17B2 /* Today.swift */; };
+		2527DA7E1CE883B4002F17B2 /* LastDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2527DA7D1CE883B4002F17B2 /* LastDay.swift */; };
 		255E53D61CD718350029E83A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255E53D51CD718350029E83A /* AppDelegate.swift */; };
 		255E53D81CD718350029E83A /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255E53D71CD718350029E83A /* TaskListViewController.swift */; };
 		255E53DD1CD718350029E83A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 255E53DB1CD718350029E83A /* Main.storyboard */; };
@@ -51,7 +51,7 @@
 		250783541CDCC84800485CD5 /* CreateNewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewTaskViewController.swift; sourceTree = "<group>"; };
 		2527DA791CE84F53002F17B2 /* OriginalButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OriginalButton.swift; sourceTree = "<group>"; };
 		2527DA7B1CE874B2002F17B2 /* ButtonTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTest.swift; sourceTree = "<group>"; };
-		2527DA7D1CE883B4002F17B2 /* Today.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Today.swift; sourceTree = "<group>"; };
+		2527DA7D1CE883B4002F17B2 /* LastDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastDay.swift; sourceTree = "<group>"; };
 		255E53D21CD718350029E83A /* TickStack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TickStack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		255E53D51CD718350029E83A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		255E53D71CD718350029E83A /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 		25D5F52C1CE6BFD400A0A8F6 /* originalClass */ = {
 			isa = PBXGroup;
 			children = (
-				2527DA7D1CE883B4002F17B2 /* Today.swift */,
+				2527DA7D1CE883B4002F17B2 /* LastDay.swift */,
 				255E53ED1CD723EB0029E83A /* TaskCell.swift */,
 				25916A0A1CE07E2B005D7386 /* TaskDataSource.swift */,
 				255E53EF1CD7295B0029E83A /* TaskCellData.swift */,
@@ -248,7 +248,7 @@
 				25D5F5031CE5D36C00A0A8F6 /* DataSourceListViewController.swift in Sources */,
 				255E53EE1CD723EB0029E83A /* TaskCell.swift in Sources */,
 				259169A71CE01C6C005D7386 /* TimerViewController.swift in Sources */,
-				2527DA7E1CE883B4002F17B2 /* Today.swift in Sources */,
+				2527DA7E1CE883B4002F17B2 /* LastDay.swift in Sources */,
 				259169A91CE01D4E005D7386 /* PercentBarView.swift in Sources */,
 				255E53D61CD718350029E83A /* AppDelegate.swift in Sources */,
 				255E53D81CD718350029E83A /* TaskListViewController.swift in Sources */,

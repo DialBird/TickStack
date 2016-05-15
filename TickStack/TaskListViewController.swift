@@ -39,26 +39,7 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
         let backButtonItem = UIBarButtonItem(title: "戻る", style: .Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backButtonItem
         
-        //realmをリセットする関数
-        let realmURL = Realm.Configuration.defaultConfiguration.fileURL!
-        let realmURLs = [
-            realmURL,
-            realmURL.URLByAppendingPathExtension("lock"),
-            realmURL.URLByAppendingPathExtension("log_a"),
-            realmURL.URLByAppendingPathExtension("log_b"),
-            realmURL.URLByAppendingPathExtension("note")
-        ]
-        let manager = NSFileManager.defaultManager()
-        for URL in realmURLs {
-            do {
-                try manager.removeItemAtURL(URL)
-            } catch {
-                // handle error
-            }
-        }
-        try! realm.write({
-            realm.deleteAll()
-        })
+        
         
         //関連付け
         tableView.dataSource = self
@@ -66,9 +47,6 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
         
         //上の空白を埋めるように設定
         self.automaticallyAdjustsScrollViewInsets = false
-        for _ in 1..<5{
-            
-        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -76,15 +54,54 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     //繰り返し実行する関数------------------------------------------------------
     override func viewWillAppear(animated: Bool) {
+        
+        //もし日にちが登録されていて、日付が変わっていたら更新
+        if let lastDay = realm.objects(LastDay).first {
+            //最後に開いた瞬間から１日以上経っているか
+            if NSDate().timeIntervalSinceDate(lastDay.date) > 30{
+                resetTable()
+                return
+            }
+            //最後に開いた瞬間と比べて日にちが違うか
+            let cal = NSCalendar(identifier: NSCalendarIdentifierGregorian)
+            if cal!.component(.Day, fromDate: lastDay.date) != cal!.component(.Day, fromDate: NSDate()){
+                resetTable()
+                return
+            }
+            //改めて今を登録
+            try! realm.write({
+                realm.objects(LastDay).first?.date = NSDate()
+            })
+        }else{
+            //まだ日にちが登録されていなかったら今日を登録
+            try! realm.write({
+                let lastDay = LastDay()
+                lastDay.date = NSDate()
+                realm.add(lastDay)
+            })
+        }
+        
+        //テーブルビューの更新
         updateTable()
     }
     
-    func updateTable(){
+    func updateTable()->Void{
 //        print(realm.objects(TaskCellDataList))
 //        print(realm.objects(TaskDataSourceList))
         tableView.setEditing(false, animated: true)
         isInEditMode = false
         tableView.reloadData()
+    }
+    
+    //日付が変わったと認識されたら発動
+    func resetTable()->Void{
+        for e in taskCellDataList.list.enumerate(){
+            if e.element.isCompleted(){
+                taskDataSourceList.list[e.index].numOfSuccess += 1
+            }
+            e.element.todayTimeStock = 0
+        }
+        print("reset")
     }
     
     
