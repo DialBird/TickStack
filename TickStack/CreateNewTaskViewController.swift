@@ -25,7 +25,7 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
     @IBOutlet weak var createBtn: UIButton!
     
     //pickerリスト（分）
-    var timeList: [Int] = [0,10,20,30,40,50,60,70,80,90]
+    var timeList: [Int] = [0,1,10,20,30,40,50,60,70,80,90]
     
     //表示している時間
     var selectedMinute: Int = 0
@@ -127,14 +127,17 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
         }else if timeTextField.text?.characters.count == 0{
             displayAlert(1)
             return
-        }else if selectedMinute == 0{
+        }else if timeTextField.text == "0"{
             displayAlert(2)
+            return
+        }else if Int(timeTextField.text!) == nil{
+            displayAlert(3)
             return
         }
         var isNewTask: Bool = true
         taskCellDataList.list.forEach{(a)->Void in
             if a.taskName == newTaskNameTextField.text!{
-                displayAlert(3)
+                displayAlert(4)
                 isNewTask = false
             }
         }
@@ -153,6 +156,8 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
         }else if num == 2{
             subTitle = "目標時間が0になっています"
         }else if num == 3{
+            subTitle = "数字を入力してください"
+        }else if num == 4{
             subTitle = "そのタスクはもう存在しています"
         }
         let alertController = UIAlertController(title: "入力が済んでいません", message: subTitle, preferredStyle: .Alert)
