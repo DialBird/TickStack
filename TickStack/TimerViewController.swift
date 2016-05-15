@@ -58,13 +58,11 @@ class TimerViewController: UIViewController {
         //タイマーを開始
         timerRunning = true
         timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(TimerViewController.update), userInfo: nil, repeats: true)
-        print("timer start")
     }
         override func viewWillDisappear(animated: Bool) {
         //タイマーを停止
         timerRunning = false
         timer.invalidate()
-        print("stop timer")
     }
     
     
@@ -74,7 +72,6 @@ class TimerViewController: UIViewController {
         let nowSecond: Int = Int(counter)
        
         let newRestSecond: Int = taskData.getRestSecond() - nowSecond
-        print(newRestSecond)
 
         //経過時間
         let passTime:(hour: Int, minute: Int, second: Int) = convertSecondIntoTime(nowSecond)

@@ -118,10 +118,10 @@ func convertNSDateIntoCalender(date: NSDate)->String{
 }
 
 //NSDateから日数さを割り出す
-func getDayGap(firstDate: NSDate, nowDate: NSDate)->Int{
-    let span = nowDate.timeIntervalSinceDate(firstDate)
-//    return Int(span/60/60/24)
-    return Int(span/10)
-}
+//func getDayGap(firstDate: NSDate, nowDate: NSDate)->Int{
+//    let span = nowDate.timeIntervalSinceDate(firstDate)
+////    return Int(span/60/60/24)
+//    return Int(span/10)
+//}
 
 

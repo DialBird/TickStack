@@ -57,13 +57,10 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
         
         //もし日にちが登録されていて、日付が変わっていたら更新
         if let lastDay = realm.objects(LastDay).first {
-            //最後に開いた瞬間から１日以上経っているか
-            if NSDate().timeIntervalSinceDate(lastDay.date) > 10{
-                dayChanged()
-            }
-            //最後に開いた瞬間と比べて日にちが違うか
+            //最後に開いた瞬間から１日以上経っているか、もしくは最後に開いた瞬間と比べて日にちが違うかで日にちの変更を判定する
             let cal = NSCalendar(identifier: NSCalendarIdentifierGregorian)
-            if cal!.component(.Day, fromDate: lastDay.date) != cal!.component(.Day, fromDate: NSDate()){
+            let sinceLastTimeGap = NSDate().timeIntervalSinceDate(lastDay.date)
+            if sinceLastTimeGap > 60*60*24 || cal!.component(.Day, fromDate: lastDay.date) != cal!.component(.Day, fromDate: NSDate()){
                 dayChanged()
             }
             //改めて今を登録
