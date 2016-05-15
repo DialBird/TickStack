@@ -46,15 +46,6 @@ class TaskCellData: Object{
             return false
         }
     }
-    
-    //秒数を
-//    func convertSecondIntoTime(second: Int) -> (hour: Int, minute: Int, second: Int){
-//        if second <= 0 {return (0,0,0)}
-//        let hour: Int = second/3600
-//        let minute: Int = (second - hour*3600)/60
-//        let second: Int = second - hour*3600 - minute*60
-//        return (hour,minute,second)
-//    }
 }
 
 

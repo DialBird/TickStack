@@ -16,11 +16,13 @@
 import UIKit
 import RealmSwift
 
+
 class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
     //UIキャッシュ
     @IBOutlet weak var newTaskNameTextField: UITextField!
     @IBOutlet weak var timeTextField: UITextField!
+    @IBOutlet weak var createBtn: UIButton!
     
     //pickerリスト（分）
     var timeList: [Int] = [0,10,20,30,40,50,60,70,80,90]
@@ -50,6 +52,9 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
         timeTextField.inputView = timePicker
         timeTextField.inputAccessoryView = PickerToolBar
         timeTextField.text = "\(selectedMinute)"
+        
+        //ボタンを修飾
+        createBtn.imageView?.backgroundColor = UIColor.redColor()
     }
     
     
