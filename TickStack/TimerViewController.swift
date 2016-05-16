@@ -34,6 +34,9 @@ class TimerViewController: UIViewController {
     var timer = NSTimer()
     var timerRunning: Bool = false
     var counter: Float = 0
+    
+    //バックグラウンドに入った場合にその瞬間の時間が記録される
+    var lastMoment: NSDate?
 
     
     //最初に実行する関数------------------------------------------------------
@@ -55,6 +58,10 @@ class TimerViewController: UIViewController {
         finishBtn.layer.borderWidth = 2
         finishBtn.layer.borderColor = UIColor.getStrongGreen().CGColor
         finishBtn.layer.cornerRadius = finishBtn.bounds.height/2
+        
+        //バックグラウンドに入ったか、バックグラウンドから戻ったかの通知を受け取る(タイマーはバックグラウンドでも勝手に動いてくれる？)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.enterBackground), name: "applicationWillResignActive", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.enterForeground), name: "applicationDidBecomeActive", object: nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -65,12 +72,25 @@ class TimerViewController: UIViewController {
         timerRunning = true
         timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(TimerViewController.update), userInfo: nil, repeats: true)
     }
-        override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(animated: Bool) {
         //タイマーを停止
         timerRunning = false
         timer.invalidate()
     }
     
+    func enterBackground()->Void{
+        print("enter")
+        if timerRunning{
+            lastMoment = NSDate()
+        }
+    }
+    
+    func enterForeground()->Void{
+        if let lastMoment = lastMoment{
+            print(NSDate().timeIntervalSinceDate(lastMoment))
+            self.lastMoment = nil
+        }
+    }
     
     //タイマーで更新される関数------------------------------------------------------
     func update(){

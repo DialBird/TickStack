@@ -84,8 +84,6 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func updateTable()->Void{
-        print(realm.objects(TaskCellDataList))
-//        print(realm.objects(TaskDataSourceList))
         tableView.setEditing(false, animated: true)
         isInEditMode = false
         tableView.reloadData()
