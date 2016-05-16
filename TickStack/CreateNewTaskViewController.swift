@@ -99,7 +99,6 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
         return true
     }
     
-    
     //ページ遷移------------------------------------------------------
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "backToTaskListFromCreateTaskSegue"{
