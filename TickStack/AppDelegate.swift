@@ -19,11 +19,17 @@ var taskDataSourceList = TaskDataSourceList()
 
 //色のエクステンション
 extension UIColor{
-    class func getCustomBlack()->UIColor{
+    class func getMainBlack()->UIColor{
         return UIColor(colorLiteralRed: 51/255, green: 51/255, blue: 51/255, alpha: 1)
     }
     class func getMainGreen()->UIColor{
         return UIColor(colorLiteralRed: 129/255, green: 214/255, blue: 116/255, alpha: 1)
+    }
+    class func getStrongGreen()->UIColor{
+        return UIColor(colorLiteralRed: 62/255, green: 186/255, blue: 43/255, alpha: 1)
+    }
+    class func getStrongPink()->UIColor{
+        return UIColor(colorLiteralRed: 180/255, green: 60/255, blue: 136/255, alpha: 1)
     }
 }
 
@@ -84,6 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.blueColor()
         UINavigationBar.appearance().backgroundColor = UIColor.getMainGreen()
 //        UINavigationBar.appearance().bar
+        
+//        UILabel.appearance().
         
         return true
     }

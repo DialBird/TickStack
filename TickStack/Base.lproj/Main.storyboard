@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--タスク一覧-->
+        <!--タイマー開始画面-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="TaskListViewController" customModule="TickStack" customModuleProvider="target" sceneMemberID="viewController">
@@ -102,7 +102,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="タスク一覧" id="50u-8V-ADF">
+                    <navigationItem key="navigationItem" title="タイマー開始画面" id="50u-8V-ADF">
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="Xfz-xh-3py">
                             <connections>
                                 <action selector="tapEditButton:" destination="9pv-A4-QxB" id="4nm-7M-5YY"/>
@@ -122,7 +122,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="517.5" y="-850.5"/>
+            <point key="canvasLocation" x="427.5" y="-850.5"/>
         </scene>
         <!--Button Test-->
         <scene sceneID="rwk-Fe-See">
@@ -143,22 +143,37 @@
                                     <constraint firstAttribute="width" constant="98" id="ZRY-qY-3E9"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="tapDownButton:" destination="Wpy-XA-tcW" eventType="touchDown" id="OR0-Hk-mFQ"/>
+                                    <action selector="tapUpButton:" destination="Wpy-XA-tcW" eventType="touchUpInside" id="K1A-Ox-Jw0"/>
+                                </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E6s-RW-mNA">
+                                <rect key="frame" x="105" y="319" width="165" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="165" id="5pn-cK-HAF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="HsM-wd-Awo" firstAttribute="centerX" secondItem="VRq-cP-nJd" secondAttribute="centerX" id="5EY-ya-YDJ"/>
+                            <constraint firstItem="E6s-RW-mNA" firstAttribute="centerX" secondItem="VRq-cP-nJd" secondAttribute="centerX" id="9rD-dt-64y"/>
+                            <constraint firstItem="E6s-RW-mNA" firstAttribute="top" secondItem="HsM-wd-Awo" secondAttribute="bottom" constant="55" id="eOs-yD-RuZ"/>
                             <constraint firstItem="HsM-wd-Awo" firstAttribute="top" secondItem="fEe-9l-KU9" secondAttribute="bottom" constant="180" id="fvZ-gq-J0j"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="btn1" destination="HsM-wd-Awo" id="LHF-0p-tyh"/>
+                        <outlet property="textField" destination="E6s-RW-mNA" id="iUk-Ej-70m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="41t-zE-Q8k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-87.5" y="-1721.5"/>
+            <point key="canvasLocation" x="-536.5" y="-1743.5"/>
         </scene>
         <!--新規タスク作成-->
         <scene sceneID="bEn-bv-UQS">
@@ -181,7 +196,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="タスク名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MzD-pf-JZp">
                                                 <rect key="frame" x="148" y="30" width="80" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="task名を入れてください" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sgD-bF-Aqn">
@@ -205,7 +220,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="１日に費やしたい目標時間" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfb-Wy-7E1">
                                                 <rect key="frame" x="68" y="124" width="240" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C2G-97-zWl">
@@ -222,7 +237,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mib-1g-E4z">
                                                         <rect key="frame" x="80" y="3" width="20" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -251,6 +266,7 @@
                                                     <constraint firstAttribute="height" constant="60" id="9th-zE-NzZ"/>
                                                     <constraint firstAttribute="width" constant="150" id="bvr-gW-VN6"/>
                                                 </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <state key="normal" title="Create"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -259,7 +275,8 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="tapCreateBtn:" destination="Vbx-30-qGn" eventType="touchUpInside" id="7Ia-Mj-ajD"/>
+                                                    <action selector="tapDownCreateBtn:" destination="Vbx-30-qGn" eventType="touchDown" id="2fx-2m-rQ3"/>
+                                                    <action selector="tapUpCreateBtn:" destination="Vbx-30-qGn" eventType="touchUpInside" id="QjP-OC-0sy"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -331,7 +348,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o0D-Kp-hRa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Asy-Gt-hMB" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="517.5" y="-1618.5"/>
+            <point key="canvasLocation" x="427.5" y="-1618.5"/>
         </scene>
         <!--タイマー-->
         <scene sceneID="9Un-3d-ajb">
@@ -346,56 +363,49 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="経過時間" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCI-25-uAC">
-                                <rect key="frame" x="158" y="94" width="60" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="148" y="94" width="80" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lL0-eN-7eY">
-                                <rect key="frame" x="91" y="122" width="193" height="40"/>
+                                <rect key="frame" x="91" y="128" width="193" height="40"/>
                                 <fontDescription key="fontDescription" name="Courier-Bold" family="Courier" pointSize="40"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本日の目標達成まで" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJY-UK-xZp">
-                                <rect key="frame" x="120" y="192" width="135" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="98" y="198" width="180" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5eD-Uk-uN1">
+                                <rect key="frame" x="91" y="232" width="193" height="40"/>
+                                <fontDescription key="fontDescription" name="Courier-Bold" family="Courier" pointSize="40"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NY6-H5-omi">
+                                <rect key="frame" x="148" y="302" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="Kt8-M1-vC1"/>
+                                    <constraint firstAttribute="height" constant="80" id="e8M-SI-3h5"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="pauseButton"/>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kdh-WT-0pe">
                                 <rect key="frame" x="113" y="528" width="150" height="60"/>
-                                <color key="backgroundColor" red="0.1154395455982854" green="1" blue="0.14006560815621605" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="DAs-TS-U2O"/>
                                     <constraint firstAttribute="height" constant="60" id="Zs2-ot-gtF"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Finish"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="30"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="tapDownFinishBtn:" destination="cXd-fF-Z9b" eventType="touchDown" id="eDV-i4-VpB"/>
+                                    <action selector="tapUpFinishBtn:" destination="cXd-fF-Z9b" eventType="touchUpInside" id="fVO-GS-etg"/>
                                     <segue destination="TwE-Ug-W6M" kind="unwind" identifier="backToTaskListFromTimerSegue" unwindAction="backToTaskListView:" id="vIJ-aB-w4u"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5eD-Uk-uN1">
-                                <rect key="frame" x="91" y="220" width="193" height="40"/>
-                                <fontDescription key="fontDescription" name="Courier-Bold" family="Courier" pointSize="40"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NY6-H5-omi">
-                                <rect key="frame" x="158" y="290" width="60" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="Kt8-M1-vC1"/>
-                                    <constraint firstAttribute="height" constant="60" id="e8M-SI-3h5"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="pauseButton"/>
-                                <connections>
-                                    <action selector="tapPauseBtn:" destination="cXd-fF-Z9b" eventType="touchUpInside" id="Dce-to-D2R"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -429,6 +439,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="currentTimerLabel" destination="lL0-eN-7eY" id="fkV-NT-2Qc"/>
+                        <outlet property="finishBtn" destination="Kdh-WT-0pe" id="h6x-83-Kyb"/>
                         <outlet property="playPauseBtn" destination="NY6-H5-omi" id="Q2P-98-rML"/>
                         <outlet property="restTimeLabel" destination="5eD-Uk-uN1" id="y36-cC-VJM"/>
                     </connections>
@@ -436,7 +447,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GhV-hC-v0c" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="TwE-Ug-W6M" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1066.5" y="-1618.5"/>
+            <point key="canvasLocation" x="1036.5" y="-1618.5"/>
         </scene>
         <!--設定-->
         <scene sceneID="c7S-76-4bL">
@@ -505,22 +516,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="タスクを選んでください" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ors-xI-kz8">
-                                <rect key="frame" x="78" y="94" width="220" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="見たいデータを選択" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ors-xI-kz8">
+                                <rect key="frame" x="98" y="94" width="180" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="50" rowHeight="30" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9eY-1H-7a7">
-                                <rect key="frame" x="30" y="148" width="315" height="440"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="50" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9eY-1H-7a7">
+                                <rect key="frame" x="30" y="128" width="315" height="460"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dataSourceViewTaskCell" id="KQT-a9-5Rj">
-                                        <rect key="frame" x="0.0" y="28" width="315" height="30"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dataSourceViewTaskCell" textLabel="Q9T-lT-nTp" style="IBUITableViewCellStyleDefault" id="KQT-a9-5Rj">
+                                        <rect key="frame" x="0.0" y="28" width="315" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KQT-a9-5Rj" id="emD-0i-my6">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="29"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="315" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Q9T-lT-nTp">
+                                                    <rect key="frame" x="15" y="0.0" width="285" height="49"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -530,7 +550,7 @@
                         <constraints>
                             <constraint firstItem="Ors-xI-kz8" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="30" id="0aR-W8-XYf"/>
                             <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="9eY-1H-7a7" secondAttribute="bottom" constant="30" id="1pz-gO-xgP"/>
-                            <constraint firstItem="9eY-1H-7a7" firstAttribute="top" secondItem="Ors-xI-kz8" secondAttribute="bottom" constant="30" id="ETS-Me-9WG"/>
+                            <constraint firstItem="9eY-1H-7a7" firstAttribute="top" secondItem="Ors-xI-kz8" secondAttribute="bottom" constant="10" id="ETS-Me-9WG"/>
                             <constraint firstAttribute="trailing" secondItem="9eY-1H-7a7" secondAttribute="trailing" constant="30" id="WhV-sj-Lcf"/>
                             <constraint firstItem="9eY-1H-7a7" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" constant="30" id="hRX-8R-nFW"/>
                             <constraint firstItem="Ors-xI-kz8" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="xeC-85-erE"/>
@@ -545,7 +565,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="434.5" y="-40.5"/>
+            <point key="canvasLocation" x="449.5" y="-40.5"/>
         </scene>
         <!--詳細データ-->
         <scene sceneID="MAG-kd-uMD">
@@ -769,11 +789,11 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wit-ZR-EkA">
                                                 <rect key="frame" x="113" y="464" width="150" height="60"/>
-                                                <color key="backgroundColor" red="0.29743845740000002" green="1" blue="0.28823390459999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="150" id="tCC-16-whE"/>
                                                     <constraint firstAttribute="height" constant="60" id="viF-8U-WCt"/>
                                                 </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <state key="normal" title="Edit"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -782,7 +802,8 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="tapEditBtn:" destination="a2q-YT-1QU" eventType="touchUpInside" id="nyG-uX-OeQ"/>
+                                                    <action selector="tapDownEditBtn:" destination="a2q-YT-1QU" eventType="touchDown" id="fHL-EB-TLr"/>
+                                                    <action selector="tapUpEditBtn:" destination="a2q-YT-1QU" eventType="touchUpInside" id="jyx-wf-Wvn"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j59-54-pHJ">
@@ -881,6 +902,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="編集" id="Clz-HO-NgL"/>
                     <connections>
+                        <outlet property="editBtn" destination="Wit-ZR-EkA" id="vR1-ar-n8Z"/>
                         <outlet property="editTaskNameTextField" destination="OBr-s4-8Il" id="3Pr-Tf-9cU"/>
                         <outlet property="editTaskTimeTextField" destination="0Hg-hH-9gL" id="Qbp-Yd-n3Z"/>
                         <segue destination="6Qk-1l-gBw" kind="unwind" identifier="backToTaskListFromEditTaskSegue" unwindAction="backToTaskListView:" id="7nK-ba-e8U"/>

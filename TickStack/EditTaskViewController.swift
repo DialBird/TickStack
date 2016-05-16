@@ -14,6 +14,7 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     //UIキャッシュ
     @IBOutlet weak var editTaskNameTextField: UITextField!
     @IBOutlet weak var editTaskTimeTextField: UITextField!
+    @IBOutlet weak var editBtn: UIButton!
     
     //前のページから渡ってくるインデックス番号
     var selectedTaskIndex: Int!
@@ -51,6 +52,12 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         editTaskNameTextField.text = taskData.taskName
         editTaskTimeTextField.text = "\(selectedMinute)"
+        
+        //ボタン修飾
+        editBtn.layer.borderWidth = 2
+        editBtn.layer.borderColor = UIColor.getStrongGreen().CGColor
+        editBtn.layer.cornerRadius = editBtn.bounds.height/2
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -106,7 +113,13 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         }
     }
 
-    @IBAction func tapEditBtn(sender: UIButton) {
+    
+    //ボタンイベント------------------------------------------------------
+    @IBAction func tapDownEditBtn(sender: UIButton) {
+        editBtn.backgroundColor = UIColor.getStrongGreen()
+    }
+    @IBAction func tapUpEditBtn(sender: UIButton) {
+        editBtn.backgroundColor = UIColor.clearColor()
         if editTaskNameTextField.text?.characters.count == 0{
             displayAlert(0)
             return
@@ -129,10 +142,11 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         if isNewTask{
             performSegueWithIdentifier("backToTaskListFromEditTaskSegue", sender: nil)
         }
-        
     }
     
-    //アラートを出す関数
+    
+    
+    //アラートを出す関数------------------------------------------------------
     func displayAlert(num: Int){
         var subTitle: String!
         if num == 0{

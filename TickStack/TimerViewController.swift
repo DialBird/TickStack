@@ -22,6 +22,7 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var currentTimerLabel: UILabel!
     @IBOutlet weak var restTimeLabel: UILabel!
     @IBOutlet weak var playPauseBtn: UIButton!
+    @IBOutlet weak var finishBtn: UIButton!
     
     //前のページから渡ってくるタスクのインデックス
     var selectedTaskIndex: Int!
@@ -49,6 +50,11 @@ class TimerViewController: UIViewController {
         let restSecond: Int = taskData.getRestSecond()
         let restTime:(hour: Int, minute: Int, second: Int) = convertSecondIntoTime(restSecond)
         restTimeLabel.text = convertTimeIntoString(restTime.hour, minute: restTime.minute, second: restTime.second)
+        
+        //ボタンの修飾
+        finishBtn.layer.borderWidth = 2
+        finishBtn.layer.borderColor = UIColor.getStrongGreen().CGColor
+        finishBtn.layer.cornerRadius = finishBtn.bounds.height/2
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -84,7 +90,11 @@ class TimerViewController: UIViewController {
     
     
     //ボタンイベント------------------------------------------------------
-    @IBAction func tapPauseBtn(sender: AnyObject) {
+    @IBAction func tapDownFinishBtn(sender: UIButton) {
+        finishBtn.backgroundColor = UIColor.getMainGreen()
+    }
+    @IBAction func tapUpFinishBtn(sender: UIButton) {
+        finishBtn.backgroundColor = UIColor.clearColor()
         if timerRunning{
             timerRunning = false
             timer.invalidate()

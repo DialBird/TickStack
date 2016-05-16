@@ -54,7 +54,9 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
         timeTextField.text = "\(selectedMinute)"
         
         //ボタンを修飾
-        createBtn.imageView?.backgroundColor = UIColor.redColor()
+        createBtn.layer.borderWidth = 2
+        createBtn.layer.borderColor = UIColor.getStrongGreen().CGColor
+        createBtn.layer.cornerRadius = createBtn.bounds.height/2
     }
     
     
@@ -120,7 +122,12 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
     
     
     //ボタンイベント------------------------------------------------------
-    @IBAction func tapCreateBtn(sender: UIButton) {
+    @IBAction func tapDownCreateBtn(sender: UIButton) {
+        createBtn.backgroundColor = UIColor.getMainGreen()
+    }
+    @IBAction func tapUpCreateBtn(sender: UIButton) {
+        createBtn.backgroundColor = UIColor.clearColor()
+        
         if newTaskNameTextField.text?.characters.count == 0{
             displayAlert(0)
             return
@@ -145,6 +152,7 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
             performSegueWithIdentifier("backToTaskListFromCreateTaskSegue", sender: nil)
         }
     }
+    
     
     //アラートを出す関数------------------------------------------------------
     func displayAlert(num: Int){
