@@ -47,6 +47,9 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
         
         //上の空白を埋めるように設定
         self.automaticallyAdjustsScrollViewInsets = false
+        
+        //ナビゲーションバーの色を決定
+        self.navigationController?.navigationBar.barTintColor = UIColor.getMainGreen()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

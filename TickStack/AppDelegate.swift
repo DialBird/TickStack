@@ -85,14 +85,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //スリープモードに入らないようにする
         UIApplication.sharedApplication().idleTimerDisabled = true
         
-        
-        //ナビゲーションバーを編集
-        UINavigationBar.appearance().tintColor = UIColor.blueColor()
-        UINavigationBar.appearance().backgroundColor = UIColor.getMainGreen()
-//        UINavigationBar.appearance().bar
-        
-//        UILabel.appearance().
-        
         return true
     }
 
