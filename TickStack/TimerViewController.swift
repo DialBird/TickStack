@@ -27,7 +27,7 @@ class TimerViewController: UIViewController {
     //タイマーの軌道に必要な変数
     var timer = NSTimer()
     var timerRunning: Bool = false
-    var counter: Float = 0
+    var counter: Double = 0
     
     //バックグラウンドに入った場合にその瞬間の時間が記録される
     var lastMoment: NSDate?
@@ -58,35 +58,49 @@ class TimerViewController: UIViewController {
         finishBtn.layer.cornerRadius = finishBtn.bounds.height/2
         
         //バックグラウンドに入ったか、バックグラウンドから戻ったかの通知を受け取る(タイマーはバックグラウンドでも勝手に動いてくれる？)
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.enterBackground), name: "applicationWillResignActive", object: nil)
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.enterForeground), name: "applicationDidBecomeActive", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.enterBackground), name: "applicationWillResignActive", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.enterForeground), name: "applicationDidBecomeActive", object: nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
+    
+    //画面のライフサイクル関係------------------------------------------------------
     override func viewWillAppear(animated: Bool) {
-        //タイマーを開始
-        timerRunning = true
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(TimerViewController.update), userInfo: nil, repeats: true)
+        timerOn()
     }
     override func viewWillDisappear(animated: Bool) {
-        //タイマーを停止
-        timerRunning = false
-        timer.invalidate()
+        timerOff()
     }
     
+    
+    //タイマー発動中にバックグラウンドに入った場合の処理------------------------------------------------------
     func enterBackground()->Void{
         if timerRunning{
+            timerOff()
             lastMoment = NSDate()
         }
     }
     
     func enterForeground()->Void{
         if let lastMoment = lastMoment{
-            print(NSDate().timeIntervalSinceDate(lastMoment))
+            let secondsSinceLastMoment: Double = NSDate().timeIntervalSinceDate(lastMoment)
+            counter += secondsSinceLastMoment
+            timerOn()
             self.lastMoment = nil
         }
+    }
+    
+    
+    //タイマーをオン、オフする関数------------------------------------------------------
+    func timerOn()->Void{
+        timerRunning = true
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(TimerViewController.update), userInfo: nil, repeats: true)
+    }
+    func timerOff()->Void{
+        timerRunning = false
+        timer.invalidate()
     }
     
     //タイマーで更新される関数------------------------------------------------------
@@ -110,13 +124,11 @@ class TimerViewController: UIViewController {
     @IBAction func tapDownPlayPauseBtn(sender: UIButton) {}
     @IBAction func tapUpPlayPauseBtn(sender: UIButton) {
         if timerRunning{
-            timerRunning = false
-            timer.invalidate()
+            timerOff()
             playPauseBtn.layer.borderColor = UIColor.getStrongGreen().CGColor
             playPauseBtn.setImage(UIImage(named: "Play Filled-50"), forState: .Normal)
         }else{
-            timerRunning = true
-            timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(TimerViewController.update), userInfo: nil, repeats: true)
+            timerOn()
             playPauseBtn.layer.borderColor = UIColor.getStrongPink().CGColor
             playPauseBtn.setImage(UIImage(named: "Pause Filled-50"), forState: .Normal)
         }
