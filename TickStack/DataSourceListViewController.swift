@@ -43,7 +43,6 @@ class DataSourceListViewController: UIViewController, UITableViewDataSource, UIT
     
     //プロトコル------------------------------------------------------
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(taskDataSourceList.list.count)
         return taskDataSourceList.list.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

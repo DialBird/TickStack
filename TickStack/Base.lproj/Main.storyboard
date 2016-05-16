@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -116,7 +116,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="U3F-8K-sYj" id="x5d-eG-MaS"/>
-                        <segue destination="cXd-fF-Z9b" kind="show" identifier="toTimerViewSegue" id="E8O-Po-S5z"/>
+                        <segue destination="41G-Tr-eJ7" kind="presentation" identifier="toTimerViewSegue" id="E8O-Po-S5z"/>
                         <segue destination="a2q-YT-1QU" kind="show" identifier="toEditTaskSegue" id="nuH-cE-rSS"/>
                     </connections>
                 </viewController>
@@ -348,7 +348,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o0D-Kp-hRa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Asy-Gt-hMB" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="427.5" y="-1618.5"/>
+            <point key="canvasLocation" x="872.5" y="-1618.5"/>
         </scene>
         <!--タイマー-->
         <scene sceneID="9Un-3d-ajb">
@@ -386,16 +386,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NY6-H5-omi">
-                                <rect key="frame" x="148" y="302" width="80" height="80"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="Kt8-M1-vC1"/>
-                                    <constraint firstAttribute="height" constant="80" id="e8M-SI-3h5"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="pauseButton"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kdh-WT-0pe">
-                                <rect key="frame" x="113" y="528" width="150" height="60"/>
+                                <rect key="frame" x="113" y="577" width="150" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="DAs-TS-U2O"/>
                                     <constraint firstAttribute="height" constant="60" id="Zs2-ot-gtF"/>
@@ -406,6 +398,20 @@
                                     <action selector="tapDownFinishBtn:" destination="cXd-fF-Z9b" eventType="touchDown" id="eDV-i4-VpB"/>
                                     <action selector="tapUpFinishBtn:" destination="cXd-fF-Z9b" eventType="touchUpInside" id="fVO-GS-etg"/>
                                     <segue destination="TwE-Ug-W6M" kind="unwind" identifier="backToTaskListFromTimerSegue" unwindAction="backToTaskListView:" id="vIJ-aB-w4u"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NY6-H5-omi">
+                                <rect key="frame" x="137" y="302" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="Kt8-M1-vC1"/>
+                                    <constraint firstAttribute="height" constant="100" id="e8M-SI-3h5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Button" image="Pause Filled-50"/>
+                                <connections>
+                                    <action selector="tapDownPlayPauseBtn:" destination="cXd-fF-Z9b" eventType="touchDown" id="Luf-kn-ncl"/>
+                                    <action selector="tapUpPlayPauseBtn:" destination="cXd-fF-Z9b" eventType="touchUpInside" id="tDh-hn-fuU"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -435,7 +441,13 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="タイマー" id="1u5-zZ-Ma5"/>
+                    <navigationItem key="navigationItem" title="タイマー" id="1u5-zZ-Ma5">
+                        <barButtonItem key="leftBarButtonItem" title="記録せずに戻る" id="6zk-IZ-nli">
+                            <connections>
+                                <segue destination="TwE-Ug-W6M" kind="unwind" identifier="backToTaskListFromTimerWithoutDoingAnything" unwindAction="backToTaskListView:" id="EY8-LR-6VQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="currentTimerLabel" destination="lL0-eN-7eY" id="fkV-NT-2Qc"/>
@@ -447,7 +459,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GhV-hC-v0c" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="TwE-Ug-W6M" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1036.5" y="-1618.5"/>
+            <point key="canvasLocation" x="1331.5" y="-850.5"/>
         </scene>
         <!--設定-->
         <scene sceneID="c7S-76-4bL">
@@ -565,7 +577,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="449.5" y="-40.5"/>
+            <point key="canvasLocation" x="427.5" y="-40.5"/>
         </scene>
         <!--詳細データ-->
         <scene sceneID="MAG-kd-uMD">
@@ -911,13 +923,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X13-Vc-rUB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="6Qk-1l-gBw" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1036.5" y="-850.5"/>
+            <point key="canvasLocation" x="1331.5" y="-1618.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="JmB-6l-Oui">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="41G-Tr-eJ7" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bYW-cM-lfH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="cXd-fF-Z9b" kind="relationship" relationship="rootViewController" id="WnS-xF-Aw3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tZs-7z-8dG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="872.5" y="-850.5"/>
         </scene>
     </scenes>
     <resources>
         <image name="Database-30" width="30" height="30"/>
+        <image name="Pause Filled-50" width="50" height="50"/>
         <image name="Settings-30" width="30" height="30"/>
         <image name="Timer-30" width="30" height="30"/>
-        <image name="pauseButton" width="80" height="80"/>
     </resources>
 </document>

@@ -179,7 +179,8 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     //セグエ呼び出し時に情報を次の画面に送る
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toTimerViewSegue"{
-            let nextVC = segue.destinationViewController as! TimerViewController
+            let nav = segue.destinationViewController as! UINavigationController
+            let nextVC = nav.topViewController as! TimerViewController
             nextVC.selectedTaskIndex = selectedTaskIndex
         }
         if segue.identifier == "toEditTaskSegue"{
