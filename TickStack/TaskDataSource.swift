@@ -6,11 +6,6 @@
 //  Copyright © 2016年 Taniguchi Keisuke. All rights reserved.
 //
 
-//実装すべき処理
-/*
- 1, このタスクを登録した日、ためた時間、成功した日数を保存しておく
-
- */
 
 import Foundation
 import RealmSwift
@@ -26,11 +21,6 @@ class TaskDataSource: Object{
     dynamic var numOfSuccess: Int = 0
     //経過した日数
     dynamic var numOfPassedDate: Int = 0
-    
-    //始めた日からから何日かを返す関数
-    func getHowManyDaysHavePassed()->Int{
-        return 0
-    }
 }
 
 class TaskDataSourceList: Object{

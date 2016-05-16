@@ -18,7 +18,7 @@ class DataSourceListViewController: UIViewController, UITableViewDataSource, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         //関連付け
         tableView.dataSource = self
         tableView.delegate = self
@@ -63,4 +63,7 @@ class DataSourceListViewController: UIViewController, UITableViewDataSource, UIT
             nextVC.selectedTaskIndex = selectedTaskIndex
         }
     }
+    
+    //詳細データページから戻るための関数
+    @IBAction func backToDataSourceListView(segue: UIStoryboardSegue){}
 }

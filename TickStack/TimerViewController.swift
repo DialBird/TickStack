@@ -12,6 +12,7 @@ import RealmSwift
 class TimerViewController: UIViewController {
 
     //UIパーツをキャッシュ
+    @IBOutlet weak var taskNameTextLabel: UILabel!
     @IBOutlet weak var currentTimerLabel: UILabel!
     @IBOutlet weak var restTimeLabel: UILabel!
     @IBOutlet weak var playPauseBtn: UIButton!
@@ -39,8 +40,7 @@ class TimerViewController: UIViewController {
         
         //前のページから来た情報を使ってページを初期化
         //task名を記載
-        self.title = taskData.taskName
-        
+        taskNameTextLabel.text = taskData.taskName
         
         //残り時間の表示
         let restSecond: Int = taskData.getRestSecond()
@@ -77,7 +77,6 @@ class TimerViewController: UIViewController {
     }
     
     func enterBackground()->Void{
-        print("enter")
         if timerRunning{
             lastMoment = NSDate()
         }
@@ -108,9 +107,7 @@ class TimerViewController: UIViewController {
     
     
     //ボタンイベント------------------------------------------------------
-    @IBAction func tapDownPlayPauseBtn(sender: UIButton) {
-        
-    }
+    @IBAction func tapDownPlayPauseBtn(sender: UIButton) {}
     @IBAction func tapUpPlayPauseBtn(sender: UIButton) {
         if timerRunning{
             timerRunning = false
@@ -124,7 +121,6 @@ class TimerViewController: UIViewController {
             playPauseBtn.setImage(UIImage(named: "Pause Filled-50"), forState: .Normal)
         }
     }
-    
     
     
     @IBAction func tapDownFinishBtn(sender: UIButton) {

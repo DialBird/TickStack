@@ -6,12 +6,6 @@
 //  Copyright © 2016年 Taniguchi Keisuke. All rights reserved.
 //
 
-//ここで実装すべき処理
-/*
- １、taskDataSourceインスタンスにtask名と登録した日にちを保存し、taskDataSourceArrayに格納する（辞書型）
- ２、taskCellDataにtask名と目標時間を登録し、taskCellDatasに格納する（配列）
- ３、これら二つの配列、辞書を端末に保存
- */
 
 import UIKit
 import RealmSwift
