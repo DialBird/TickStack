@@ -33,7 +33,7 @@ class DisplayTaskDataViewController: UIViewController {
         totalStockedTimeTextLavel.text = "\(time.hour)時間\(time.minute)分\(time.second)秒"
         
         //開始日
-        firstDateTextLabel.text = convertNSDateIntoCalender(taskDataSource.firstDay)
+        firstDateTextLabel.text = convertNSDateIntoCalenderString(taskDataSource.firstDay)
         
         //タスクに捧げた時間
         totalDevoteDateTextLabel.text = "\(taskDataSource.numOfPassedDate)日"

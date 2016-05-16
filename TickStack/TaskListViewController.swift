@@ -8,10 +8,12 @@
 
 import UIKit
 import RealmSwift
+import DZNEmptyDataSet
 
-class TaskListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TaskListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate {
     
     //UIのキャッシュ
+    @IBOutlet weak var dateTellerTextLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     //選択したタスク名を、startTimerViewに送るために格納する
@@ -30,6 +32,9 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
         //tableViewの関連付け
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
+        tableView.tableFooterView = UIView()
         
         //tableView上の空白を埋めるように設定
         self.automaticallyAdjustsScrollViewInsets = false
@@ -40,10 +45,27 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text: String = "タスクが登録されていません"
+        let attr = [NSFontAttributeName: UIFont.systemFontOfSize(15)]
+        return NSAttributedString(string: text, attributes: attr)
+    }
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text: String = "右上の追加ボタンから追加してください"
+        let font: UIFont = UIFont.systemFontOfSize(12)
+        return NSAttributedString(string: text, attributes: [NSFontAttributeName : font])
+    }
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "empty")
+    }
     
     //繰り返し実行する関数------------------------------------------------------
     override func viewWillAppear(animated: Bool) {
+        let calendarParts: (year: Int, month: Int, day: Int) = convertNSDateIntoCalenderParts(NSDate())
+        let year: Int = calendarParts.year
+        let month: Int = calendarParts.month
+        let day: Int = calendarParts.day
+        dateTellerTextLabel.text = "\(year)/\(month)/\(day)の状況"
         
         //もしも前に登録したLastDayオブジェクトがなければ初期化したものを保存する
         if realm.objects(LastDay).first == nil{
@@ -91,6 +113,7 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     //tableのプロトコル------------------------------------------------------
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return taskCellDataList.list.count
     }

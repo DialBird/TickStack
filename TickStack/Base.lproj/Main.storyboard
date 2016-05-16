@@ -24,19 +24,19 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U3F-8K-sYj">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U3F-8K-sYj">
                                 <rect key="frame" x="30" y="128" width="315" height="460"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" id="s9T-Vu-tQK" customClass="TaskCell" customModule="TickStack" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="315" height="100"/>
+                                        <rect key="frame" x="0.0" y="28" width="315" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s9T-Vu-tQK" id="gUU-iy-ySZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="99"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="315" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="taskName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z9I-RU-Rpx">
-                                                    <rect key="frame" x="110" y="18" width="95" height="24"/>
+                                                    <rect key="frame" x="110" y="13" width="95" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="36" id="oQ4-kD-g5R"/>
                                                     </constraints>
@@ -50,17 +50,16 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9l-dA-k1Q">
-                                                    <rect key="frame" x="115" y="57" width="86" height="24"/>
+                                                    <rect key="frame" x="115" y="42" width="86" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="H9l-dA-k1Q" firstAttribute="leading" secondItem="Z9I-RU-Rpx" secondAttribute="trailing" constant="10" id="7zi-yy-ynr"/>
                                                 <constraint firstAttribute="bottom" secondItem="H9l-dA-k1Q" secondAttribute="bottom" constant="10" id="8XE-Zk-sgL"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="H9l-dA-k1Q" secondAttribute="bottom" constant="10" id="A9L-As-vt0"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="H9l-dA-k1Q" secondAttribute="bottom" constant="5" id="A9L-As-vt0"/>
                                                 <constraint firstItem="H9l-dA-k1Q" firstAttribute="centerY" secondItem="gUU-iy-ySZ" secondAttribute="centerY" id="RDh-zW-Ih0"/>
                                                 <constraint firstAttribute="leadingMargin" secondItem="Z9I-RU-Rpx" secondAttribute="leading" id="amx-gj-JuA"/>
                                                 <constraint firstItem="Z9I-RU-Rpx" firstAttribute="centerY" secondItem="gUU-iy-ySZ" secondAttribute="centerY" id="fng-ye-vDh"/>
@@ -69,7 +68,7 @@
                                                 <constraint firstItem="Z9I-RU-Rpx" firstAttribute="centerX" secondItem="gUU-iy-ySZ" secondAttribute="centerX" id="iwc-ou-6dJ"/>
                                                 <constraint firstItem="Z9I-RU-Rpx" firstAttribute="centerY" secondItem="gUU-iy-ySZ" secondAttribute="centerY" id="tFI-Oc-BTa"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="H9l-dA-k1Q" secondAttribute="trailing" constant="10" id="upo-cl-ywP"/>
-                                                <constraint firstItem="Z9I-RU-Rpx" firstAttribute="top" secondItem="gUU-iy-ySZ" secondAttribute="topMargin" constant="10" id="xep-1T-TcR"/>
+                                                <constraint firstItem="Z9I-RU-Rpx" firstAttribute="top" secondItem="gUU-iy-ySZ" secondAttribute="topMargin" constant="5" id="xep-1T-TcR"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -123,6 +122,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="dateTellerTextLabel" destination="GQp-Fh-VrH" id="VFq-hS-psw"/>
                         <outlet property="tableView" destination="U3F-8K-sYj" id="x5d-eG-MaS"/>
                         <segue destination="41G-Tr-eJ7" kind="presentation" identifier="toTimerViewSegue" id="E8O-Po-S5z"/>
                         <segue destination="a2q-YT-1QU" kind="show" identifier="toEditTaskSegue" id="nuH-cE-rSS"/>
@@ -482,7 +482,7 @@
             </objects>
             <point key="canvasLocation" x="502.5" y="792.5"/>
         </scene>
-        <!--蓄積したデータ-->
+        <!--データ一覧-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
                 <viewController id="8rJ-Kc-sve" customClass="DataSourceListViewController" customModule="TickStack" customModuleProvider="target" sceneMemberID="viewController">
@@ -494,18 +494,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="見たいデータを選択" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ors-xI-kz8">
-                                <rect key="frame" x="98" y="94" width="180" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="50" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9eY-1H-7a7">
-                                <rect key="frame" x="30" y="128" width="315" height="460"/>
+                                <rect key="frame" x="30" y="94" width="315" height="494"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dataSourceViewTaskCell" textLabel="Q9T-lT-nTp" style="IBUITableViewCellStyleDefault" id="KQT-a9-5Rj">
-                                        <rect key="frame" x="0.0" y="28" width="315" height="50"/>
+                                        <rect key="frame" x="0.0" y="92" width="315" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KQT-a9-5Rj" id="emD-0i-my6">
                                             <rect key="frame" x="0.0" y="0.0" width="315" height="49"/>
@@ -526,15 +520,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Ors-xI-kz8" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="30" id="0aR-W8-XYf"/>
                             <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="9eY-1H-7a7" secondAttribute="bottom" constant="30" id="1pz-gO-xgP"/>
-                            <constraint firstItem="9eY-1H-7a7" firstAttribute="top" secondItem="Ors-xI-kz8" secondAttribute="bottom" constant="10" id="ETS-Me-9WG"/>
                             <constraint firstAttribute="trailing" secondItem="9eY-1H-7a7" secondAttribute="trailing" constant="30" id="WhV-sj-Lcf"/>
+                            <constraint firstItem="9eY-1H-7a7" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="30" id="Yje-dc-999"/>
                             <constraint firstItem="9eY-1H-7a7" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" constant="30" id="hRX-8R-nFW"/>
-                            <constraint firstItem="Ors-xI-kz8" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="xeC-85-erE"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="蓄積したデータ" id="HJq-rp-bQT"/>
+                    <navigationItem key="navigationItem" title="データ一覧" id="HJq-rp-bQT"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableView" destination="9eY-1H-7a7" id="uEp-rp-K16"/>

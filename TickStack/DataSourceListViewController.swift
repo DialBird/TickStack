@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import RealmSwift
+import DZNEmptyDataSet
 
-class DataSourceListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DataSourceListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -19,9 +19,14 @@ class DataSourceListViewController: UIViewController, UITableViewDataSource, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //関連付け
+        //tableViewとの関連付け
         tableView.dataSource = self
         tableView.delegate = self
+        
+        //DZNを使うための関連付け
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
+        tableView.tableFooterView = UIView()
         
         //上の空白を埋めるように設定
         self.automaticallyAdjustsScrollViewInsets = false
@@ -33,6 +38,8 @@ class DataSourceListViewController: UIViewController, UITableViewDataSource, UIT
         super.didReceiveMemoryWarning()
     }
     
+    
+    //ページを表示するたびに起動する------------------------------------------------------
     override func viewWillAppear(animated: Bool) {
         updateTable()
     }
@@ -41,7 +48,8 @@ class DataSourceListViewController: UIViewController, UITableViewDataSource, UIT
         tableView.reloadData()
     }
     
-    //プロトコル------------------------------------------------------
+    
+    //tableViewプロトコル------------------------------------------------------
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return taskDataSourceList.list.count
     }
@@ -54,6 +62,22 @@ class DataSourceListViewController: UIViewController, UITableViewDataSource, UIT
         selectedTaskIndex = indexPath.row
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         performSegueWithIdentifier("toDisplayTaskDataSegue", sender: nil)
+    }
+    
+    
+    //DZNプロトコル------------------------------------------------------
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text: String = "タスクが登録されていません"
+        let attr = [NSFontAttributeName: UIFont.systemFontOfSize(15)]
+        return NSAttributedString(string: text, attributes: attr)
+    }
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text: String = "タスクタイマーメニューから追加してください"
+        let attr = [NSFontAttributeName: UIFont.systemFontOfSize(12)]
+        return NSAttributedString(string: text, attributes: attr)
+    }
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "empty")
     }
     
     //ページ遷移
