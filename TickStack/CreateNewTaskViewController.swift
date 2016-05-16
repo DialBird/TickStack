@@ -25,7 +25,7 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
     @IBOutlet weak var createBtn: UIButton!
     
     //pickerリスト（分）
-    var timeList: [Int] = [0,1,10,20,30,40,50,60,70,80,90]
+    var timeList: [Int] = [0,10,20,30,40,50,60,70,80,90]
     
     //表示している時間
     var selectedMinute: Int = 0

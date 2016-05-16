@@ -20,7 +20,6 @@ class TaskCellData: Object{
     
     //目標ゴール時刻を秒に換算して返す
     func getTaskGoalSecond()->Int{
-        if taskGoalMinute == 1 {return 10}
         return taskGoalMinute*60
     }
     
