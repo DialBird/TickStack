@@ -5,13 +5,6 @@
 //  Created by Taniguchi Keisuke on 2016/05/02.
 //  Copyright © 2016年 Taniguchi Keisuke. All rights reserved.
 //
-//ここで実装すべき処理
-/*
- １、タイマーを起動し、ポーズ、リスタート、取り消して戻る、登録のボタンを作る
- ２、このtaskの名前から、realmを呼び出し、taskDataSourceを取得する
- ３、このtaskの名前から、特定のtaskCellDataを呼び出し、taskCellDataに秒を格納する
- ４、これら二つのオブジェクトに対し、ボタンを押した時に更新する
- */
 
 import UIKit
 import RealmSwift

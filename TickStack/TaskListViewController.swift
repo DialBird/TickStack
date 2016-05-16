@@ -5,15 +5,6 @@
 //  Created by Taniguchi Keisuke on 2016/05/02.
 //  Copyright © 2016年 Taniguchi Keisuke. All rights reserved.
 //
-//ここで実装すべき処理
-/*
- １、最初に現在保存されているtaskCellDatasを呼び出して、中身の配列をテーブル上に順に表示
- ２、もしも表示する際に、既に100%になっているタスクがあった場合は、クリアマークを付けてあげる
- ３、日にちが変わった時に、taskCellDatasの中身をリセットする。
- ４、日にちが変わった時に、taskCellDatasの条件が達成されていれば、taskDataSourceを呼び出して、達成した日にち数を１日足してやる
- ここでは保存データの書き込みは日にちが変わった時のみ
- ５、タイマーが押されたらタスク名をタイマー画面に送る
- */
 
 import UIKit
 import RealmSwift

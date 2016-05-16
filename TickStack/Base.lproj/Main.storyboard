@@ -124,57 +124,6 @@
             </objects>
             <point key="canvasLocation" x="427.5" y="-850.5"/>
         </scene>
-        <!--Button Test-->
-        <scene sceneID="rwk-Fe-See">
-            <objects>
-                <viewController id="Wpy-XA-tcW" customClass="ButtonTest" customModule="TickStack" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fEe-9l-KU9"/>
-                        <viewControllerLayoutGuide type="bottom" id="CDY-i9-fKg"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="VRq-cP-nJd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HsM-wd-Awo">
-                                <rect key="frame" x="138" y="200" width="98" height="64"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="UXS-ZO-CzH"/>
-                                    <constraint firstAttribute="width" constant="98" id="ZRY-qY-3E9"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="tapDownButton:" destination="Wpy-XA-tcW" eventType="touchDown" id="OR0-Hk-mFQ"/>
-                                    <action selector="tapUpButton:" destination="Wpy-XA-tcW" eventType="touchUpInside" id="K1A-Ox-Jw0"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E6s-RW-mNA">
-                                <rect key="frame" x="105" y="319" width="165" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="165" id="5pn-cK-HAF"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="HsM-wd-Awo" firstAttribute="centerX" secondItem="VRq-cP-nJd" secondAttribute="centerX" id="5EY-ya-YDJ"/>
-                            <constraint firstItem="E6s-RW-mNA" firstAttribute="centerX" secondItem="VRq-cP-nJd" secondAttribute="centerX" id="9rD-dt-64y"/>
-                            <constraint firstItem="E6s-RW-mNA" firstAttribute="top" secondItem="HsM-wd-Awo" secondAttribute="bottom" constant="55" id="eOs-yD-RuZ"/>
-                            <constraint firstItem="HsM-wd-Awo" firstAttribute="top" secondItem="fEe-9l-KU9" secondAttribute="bottom" constant="180" id="fvZ-gq-J0j"/>
-                        </constraints>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <connections>
-                        <outlet property="btn1" destination="HsM-wd-Awo" id="LHF-0p-tyh"/>
-                        <outlet property="textField" destination="E6s-RW-mNA" id="iUk-Ej-70m"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="41t-zE-Q8k" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-536.5" y="-1743.5"/>
-        </scene>
         <!--新規タスク作成-->
         <scene sceneID="bEn-bv-UQS">
             <objects>
