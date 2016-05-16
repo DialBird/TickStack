@@ -54,12 +54,14 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
             })
         }
         
+        //日にちが変わっていたらdayChangedをtrueにする
         if checkDayChange(){
             dayChanged = true
         }else{
             dayChanged = false
         }
         
+        //日付の再登録
         try! realm.write({
             realm.objects(LastDay).first?.date = NSDate()
         })
@@ -73,7 +75,7 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
         let lastDay: LastDay = realm.objects(LastDay).first!
         let cal = NSCalendar(identifier: NSCalendarIdentifierGregorian)
         let sinceLastTimeGap: Double = NSDate().timeIntervalSinceDate(lastDay.date)
-        if sinceLastTimeGap > 10 || cal!.component(.Day, fromDate: lastDay.date) != cal!.component(.Day, fromDate: NSDate()){
+        if sinceLastTimeGap > 60*60*24 || cal!.component(.Day, fromDate: lastDay.date) != cal!.component(.Day, fromDate: NSDate()){
             return true
         }else{
             return false
