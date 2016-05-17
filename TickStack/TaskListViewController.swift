@@ -201,7 +201,7 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         if segue.identifier == "toTimerFor4sSegue"{
             let nav = segue.destinationViewController as! UINavigationController
-            let nextVC = nav.topViewController as! TimerViewController
+            let nextVC = nav.topViewController as! TimerViewControllerFor4s
             nextVC.selectedTaskIndex = selectedTaskIndex
         }
         if segue.identifier == "toEditTaskSegue"{

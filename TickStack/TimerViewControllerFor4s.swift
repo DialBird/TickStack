@@ -9,8 +9,8 @@
 import UIKit
 import RealmSwift
 
-class TimerViewController: UIViewController {
-
+class TimerViewControllerFor4s: UIViewController {
+    
     //UIパーツをキャッシュ
     @IBOutlet weak var taskNameTextLabel: UILabel!
     @IBOutlet weak var currentTimerLabel: UILabel!
@@ -31,7 +31,7 @@ class TimerViewController: UIViewController {
     
     //バックグラウンドに入った場合にその瞬間の時間が記録される
     var lastMoment: NSDate?
-
+    
     
     //最初に実行する関数------------------------------------------------------
     override func viewDidLoad() {
@@ -51,7 +51,7 @@ class TimerViewController: UIViewController {
         playPauseBtn.layer.cornerRadius = playPauseBtn.bounds.width/2
         playPauseBtn.layer.borderWidth = 2
         playPauseBtn.layer.borderColor = UIColor.getStrongPink().CGColor
-        playPauseBtn.imageView?.image = UIImage(named: "Pause Filled-50")
+        playPauseBtn.imageView?.image = UIImage(named: "Pause Filled-30")
         
         finishBtn.layer.borderWidth = 2
         finishBtn.layer.borderColor = UIColor.getStrongGreen().CGColor
@@ -67,7 +67,7 @@ class TimerViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     
     //画面のライフサイクル関係------------------------------------------------------
     override func viewWillAppear(animated: Bool) {
@@ -110,9 +110,9 @@ class TimerViewController: UIViewController {
     func update(){
         counter += 0.1
         let nowSecond: Int = Int(counter)
-       
+        
         let newRestSecond: Int = taskData.getRestSecond() - nowSecond
-
+        
         //経過時間
         let passTime:(hour: Int, minute: Int, second: Int) = convertSecondIntoTime(nowSecond)
         currentTimerLabel.text = convertTimeIntoString(passTime.hour, minute: passTime.minute, second: passTime.second)
@@ -129,11 +129,11 @@ class TimerViewController: UIViewController {
         if timerRunning{
             timerOff()
             playPauseBtn.layer.borderColor = UIColor.getStrongGreen().CGColor
-            playPauseBtn.setImage(UIImage(named: "Play Filled-50"), forState: .Normal)
+            playPauseBtn.setImage(UIImage(named: "Play Filled-30"), forState: .Normal)
         }else{
             timerOn()
             playPauseBtn.layer.borderColor = UIColor.getStrongPink().CGColor
-            playPauseBtn.setImage(UIImage(named: "Pause Filled-50"), forState: .Normal)
+            playPauseBtn.setImage(UIImage(named: "Pause Filled-30"), forState: .Normal)
         }
     }
     
@@ -160,6 +160,7 @@ class TimerViewController: UIViewController {
         }
     }
 }
+
 
 
 

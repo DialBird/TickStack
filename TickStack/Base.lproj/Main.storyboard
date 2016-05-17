@@ -849,7 +849,7 @@
         <!--タイマー-->
         <scene sceneID="tZQ-sd-sgo">
             <objects>
-                <viewController id="eU7-St-tEu" customClass="TimerViewController" customModule="TickStack" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="eU7-St-tEu" customClass="TimerViewControllerFor4s" customModule="TickStack" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ifN-qB-URn"/>
                         <viewControllerLayoutGuide type="bottom" id="ioQ-LL-md8"/>
