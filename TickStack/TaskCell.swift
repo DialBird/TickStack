@@ -15,6 +15,7 @@ class TaskCell: UITableViewCell {
     //キャッシュ
     @IBOutlet weak var taskNameLabel: UILabel!
     @IBOutlet weak var taskRestTimeLabel: UILabel!
+    @IBOutlet weak var clearIconImageView: UIImageView!
     
     
     //最初からあった関数------------------------------------------------------
@@ -30,9 +31,16 @@ class TaskCell: UITableViewCell {
     func setCell(taskData: TaskCellData){
         //タスク名を表示
         taskNameLabel.text = taskData.taskName
-        //タスクの残り時間を表示
-        let time:(hour: Int, minute: Int, second: Int) = convertSecondIntoTime(taskData.getRestSecond())
-        taskRestTimeLabel.text = convertTimeIntoString(time.hour, minute: time.minute, second: time.second)
+        
+        //目標達成したタスクとしていないタスクで表示を変える
+        if taskData.isCompleted(){
+            taskRestTimeLabel.text = "本日の目標達成！"
+            clearIconImageView.alpha = 1
+        }else{
+            let time:(hour: Int, minute: Int, second: Int) = convertSecondIntoTime(taskData.getRestSecond())
+            taskRestTimeLabel.text = "残り　\(convertTimeIntoString(time.hour, minute: time.minute, second: time.second))"
+            clearIconImageView.alpha = 0
+        }
     }
     
     

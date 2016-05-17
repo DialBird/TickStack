@@ -377,7 +377,7 @@
 				);
 				INFOPLIST_FILE = TickStack/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = keisuke.TickStack;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.keisuke.TickStack;
 				PRODUCT_NAME = TickStack;
 			};
 			name = Debug;
@@ -393,7 +393,7 @@
 				);
 				INFOPLIST_FILE = TickStack/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = keisuke.TickStack;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.keisuke.TickStack;
 				PRODUCT_NAME = TickStack;
 			};
 			name = Release;
