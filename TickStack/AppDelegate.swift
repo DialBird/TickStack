@@ -68,6 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            realm.deleteAll()
 //        })
         
+        
         //サイズを判定------------------------------------------------------
         //3.5インチだった場合にはレイアウトを変更する
         if (screenSize.width == 640 && screenSize.height == 960){
@@ -91,6 +92,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         }
         
+        
+        //デモ用------------------------------------------------------
+//        try! realm.write({
+//            let task1 = TaskCellData()
+//            task1.taskName = "英語"
+//            task1.taskGoalMinute = 30
+//            task1.todaySecondStock = 11
+//            
+//            let task2 = TaskCellData()
+//            task2.taskName = "読書"
+//            task2.taskGoalMinute = 10
+//            task2.todaySecondStock = 5
+//            
+//            let task3 = TaskCellData()
+//            task3.taskName = "散歩"
+//            task3.taskGoalMinute = 10
+//            task3.todaySecondStock = 600
+//            taskCellDataList.list.append(task1)
+//            taskCellDataList.list.append(task2)
+//            taskCellDataList.list.append(task3)
+//            
+//            let demo = TaskDataSource()
+//            demo.firstDay = NSDate()
+//            demo.taskName = "散歩"
+//            demo.numOfPassedDate = 110
+//            demo.numOfSuccess = 93
+//            demo.stockedTime = 120324
+//            taskDataSourceList.list.append(demo)
+//        })
         
         //スリープモードに入らないようにする
         UIApplication.sharedApplication().idleTimerDisabled = true
