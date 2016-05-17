@@ -16,6 +16,11 @@ let realm = try! Realm()
 var taskCellDataList = TaskCellDataList()
 var taskDataSourceList = TaskDataSourceList()
 
+//サイズを格納
+let screenSize: CGSize = UIScreen.mainScreen().nativeBounds.size
+let screenStr: String = "width: \(screenSize.width) height: \(screenSize.height)"
+var thisIs4s: Bool = false
+
 
 //色のエクステンション
 extension UIColor{
@@ -62,6 +67,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        try! realm.write({
 //            realm.deleteAll()
 //        })
+        
+        //サイズを判定------------------------------------------------------
+        //3.5インチだった場合にはレイアウトを変更する
+        if (screenSize.width == 640 && screenSize.height == 960){
+            thisIs4s = true
+        }
         
         
         //もしすでにtaskCellDataListが入っていたらそれを使う

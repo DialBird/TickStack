@@ -133,8 +133,14 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
         //タップしたセルのindexを次のページに渡す
         selectedTaskIndex = indexPath.row
         
+        if thisIs4s{
+            performSegueWithIdentifier("toTimerFor4sSegue", sender: nil)
+        }else{
+            performSegueWithIdentifier("toTimerViewSegue", sender: nil)
+        }
+        
         //次のページへのセグエを呼び出す
-        performSegueWithIdentifier("toTimerViewSegue", sender: nil)
+        
         
         //選択色を落とす
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -193,6 +199,11 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
             let nextVC = nav.topViewController as! TimerViewController
             nextVC.selectedTaskIndex = selectedTaskIndex
         }
+        if segue.identifier == "toTimerFor4sSegue"{
+            let nav = segue.destinationViewController as! UINavigationController
+            let nextVC = nav.topViewController as! TimerViewController
+            nextVC.selectedTaskIndex = selectedTaskIndex
+        }
         if segue.identifier == "toEditTaskSegue"{
             let nextVC = segue.destinationViewController as! EditTaskViewController
             nextVC.selectedTaskIndex = selectedTaskIndex
@@ -200,7 +211,7 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     
-    //UnWindSegueで起動する関数
+    //UnWindSegueで起動する関数------------------------------------------------------
     //タイマー画面で時間を保存しつつ帰って来る
     //viewWillAppearで処理は記載済み
     @IBAction func backToTaskListView(segue: UIStoryboardSegue){}
@@ -209,6 +220,9 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
         isInEditMode = !isInEditMode
         tableView.setEditing(isInEditMode, animated: true)
     }
+    
+    
+    
 }
 
 

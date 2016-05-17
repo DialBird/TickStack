@@ -51,7 +51,7 @@ class TimerViewController: UIViewController {
         playPauseBtn.layer.cornerRadius = playPauseBtn.bounds.width/2
         playPauseBtn.layer.borderWidth = 2
         playPauseBtn.layer.borderColor = UIColor.getStrongPink().CGColor
-        playPauseBtn.imageView?.image = UIImage(named: "Pause Filled-50")
+        playPauseBtn.imageView?.image = UIImage(named: "Pause Filled-30")
         
         finishBtn.layer.borderWidth = 2
         finishBtn.layer.borderColor = UIColor.getStrongGreen().CGColor
@@ -129,11 +129,11 @@ class TimerViewController: UIViewController {
         if timerRunning{
             timerOff()
             playPauseBtn.layer.borderColor = UIColor.getStrongGreen().CGColor
-            playPauseBtn.setImage(UIImage(named: "Play Filled-50"), forState: .Normal)
+            playPauseBtn.setImage(UIImage(named: "Play Filled-30"), forState: .Normal)
         }else{
             timerOn()
             playPauseBtn.layer.borderColor = UIColor.getStrongPink().CGColor
-            playPauseBtn.setImage(UIImage(named: "Pause Filled-50"), forState: .Normal)
+            playPauseBtn.setImage(UIImage(named: "Pause Filled-30"), forState: .Normal)
         }
     }
     

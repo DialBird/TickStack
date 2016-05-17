@@ -61,7 +61,12 @@ class DataSourceListViewController: UIViewController, UITableViewDataSource, UIT
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectedTaskIndex = indexPath.row
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        performSegueWithIdentifier("toDisplayTaskDataSegue", sender: nil)
+        
+        if thisIs4s{
+            performSegueWithIdentifier("toDisplayTaskDataFor4sSegue", sender: nil)
+        }else{
+            performSegueWithIdentifier("toDisplayTaskDataSegue", sender: nil)
+        }
     }
     
     
@@ -80,9 +85,13 @@ class DataSourceListViewController: UIViewController, UITableViewDataSource, UIT
         return UIImage(named: "empty")
     }
     
-    //ページ遷移
+    //ページ遷移(どっちの場合でも実質同じ)
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toDisplayTaskDataSegue"{
+            let nextVC = segue.destinationViewController as! DisplayTaskDataViewController
+            nextVC.selectedTaskIndex = selectedTaskIndex
+        }
+        if segue.identifier == "toDisplayTaskDataFor4sSegue"{
             let nextVC = segue.destinationViewController as! DisplayTaskDataViewController
             nextVC.selectedTaskIndex = selectedTaskIndex
         }

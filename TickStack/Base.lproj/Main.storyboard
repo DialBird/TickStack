@@ -136,6 +136,7 @@
                         <outlet property="tableView" destination="U3F-8K-sYj" id="x5d-eG-MaS"/>
                         <segue destination="41G-Tr-eJ7" kind="presentation" identifier="toTimerViewSegue" id="E8O-Po-S5z"/>
                         <segue destination="a2q-YT-1QU" kind="show" identifier="toEditTaskSegue" id="nuH-cE-rSS"/>
+                        <segue destination="3Eo-pk-sij" kind="presentation" identifier="toTimerFor4sSegue" id="tON-Ge-jDs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
@@ -486,6 +487,7 @@
                     <connections>
                         <outlet property="tableView" destination="9eY-1H-7a7" id="uEp-rp-K16"/>
                         <segue destination="K5Y-67-DwS" kind="show" identifier="toDisplayTaskDataSegue" id="LN9-WH-CSj"/>
+                        <segue destination="n4J-cE-ka5" kind="show" identifier="toDisplayTaskDataFor4sSegue" id="yhG-ou-ZDI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -844,9 +846,252 @@
             </objects>
             <point key="canvasLocation" x="872.5" y="-850.5"/>
         </scene>
+        <!--タイマー-->
+        <scene sceneID="tZQ-sd-sgo">
+            <objects>
+                <viewController id="eU7-St-tEu" customClass="TimerViewController" customModule="TickStack" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ifN-qB-URn"/>
+                        <viewControllerLayoutGuide type="bottom" id="ioQ-LL-md8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="X5a-nX-z17">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XMT-hA-g24">
+                                <rect key="frame" x="85" y="390" width="150" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="3Af-Xh-6uA"/>
+                                    <constraint firstAttribute="height" constant="60" id="gw4-hl-CJt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="時間を貯める"/>
+                                <connections>
+                                    <action selector="tapDownFinishBtn:" destination="eU7-St-tEu" eventType="touchDown" id="nnp-Ji-PHJ"/>
+                                    <action selector="tapUpFinishBtn:" destination="eU7-St-tEu" eventType="touchUpInside" id="Fuf-FB-GWp"/>
+                                    <segue destination="5Dq-WJ-8x7" kind="unwind" identifier="backToTaskListFromTimerSegue" unwindAction="backToTaskListView:" id="USq-fI-2uc"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="経過時間" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUx-78-JFq">
+                                <rect key="frame" x="120" y="138" width="80" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbl-az-h2b">
+                                <rect key="frame" x="88" y="172" width="145" height="30"/>
+                                <fontDescription key="fontDescription" name="Courier-Bold" family="Courier" pointSize="30"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本日の目標達成まで" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oei-iT-OrY">
+                                <rect key="frame" x="70" y="222" width="180" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Agq-yn-ZOe">
+                                <rect key="frame" x="130" y="306" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="91b-kk-3xz"/>
+                                    <constraint firstAttribute="width" constant="60" id="q8V-dg-rd4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Button" image="Pause Filled-30"/>
+                                <connections>
+                                    <action selector="tapDownPlayPauseBtn:" destination="eU7-St-tEu" eventType="touchDown" id="M9f-v5-Yta"/>
+                                    <action selector="tapUpPlayPauseBtn:" destination="eU7-St-tEu" eventType="touchUpInside" id="7qt-hj-OpV"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="task名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9I3-m9-CU7">
+                                <rect key="frame" x="130" y="94" width="60" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NNd-4a-4mZ">
+                                <rect key="frame" x="88" y="256" width="145" height="30"/>
+                                <fontDescription key="fontDescription" name="Courier-Bold" family="Courier" pointSize="30"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9I3-m9-CU7" firstAttribute="centerX" secondItem="X5a-nX-z17" secondAttribute="centerX" id="6Gx-MI-CTB"/>
+                            <constraint firstItem="Oei-iT-OrY" firstAttribute="leading" secondItem="X5a-nX-z17" secondAttribute="leadingMargin" constant="10" id="9Uj-Xv-yb9"/>
+                            <constraint firstItem="fUx-78-JFq" firstAttribute="centerX" secondItem="X5a-nX-z17" secondAttribute="centerX" id="9eH-Oc-ivv"/>
+                            <constraint firstItem="Agq-yn-ZOe" firstAttribute="top" secondItem="NNd-4a-4mZ" secondAttribute="bottom" constant="20" id="Cah-17-hnm"/>
+                            <constraint firstItem="ioQ-LL-md8" firstAttribute="top" secondItem="XMT-hA-g24" secondAttribute="bottom" constant="30" id="HDJ-Lx-Gm6"/>
+                            <constraint firstItem="fUx-78-JFq" firstAttribute="top" secondItem="9I3-m9-CU7" secondAttribute="bottom" constant="20" id="KCW-no-ddp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XMT-hA-g24" secondAttribute="trailing" constant="80" id="PbF-qP-Lam"/>
+                            <constraint firstItem="Agq-yn-ZOe" firstAttribute="top" secondItem="Oei-iT-OrY" secondAttribute="bottom" constant="50" id="TVt-6L-cY9"/>
+                            <constraint firstItem="Oei-iT-OrY" firstAttribute="centerX" secondItem="X5a-nX-z17" secondAttribute="centerX" id="Wfe-Xu-V8S"/>
+                            <constraint firstItem="NNd-4a-4mZ" firstAttribute="centerX" secondItem="X5a-nX-z17" secondAttribute="centerX" id="hiA-pd-GM7"/>
+                            <constraint firstItem="dbl-az-h2b" firstAttribute="top" secondItem="fUx-78-JFq" secondAttribute="bottom" constant="10" id="kO5-z6-k4w"/>
+                            <constraint firstItem="Agq-yn-ZOe" firstAttribute="centerX" secondItem="X5a-nX-z17" secondAttribute="centerX" id="lPB-09-1dI"/>
+                            <constraint firstItem="dbl-az-h2b" firstAttribute="centerX" secondItem="X5a-nX-z17" secondAttribute="centerX" id="p3o-NO-kor"/>
+                            <constraint firstItem="XMT-hA-g24" firstAttribute="centerX" secondItem="X5a-nX-z17" secondAttribute="centerX" id="qfM-co-Wus"/>
+                            <constraint firstItem="NNd-4a-4mZ" firstAttribute="top" secondItem="Oei-iT-OrY" secondAttribute="bottom" constant="10" id="rir-41-Z1y"/>
+                            <constraint firstItem="9I3-m9-CU7" firstAttribute="top" secondItem="ifN-qB-URn" secondAttribute="bottom" constant="30" id="rsm-ud-e0Y"/>
+                            <constraint firstItem="Agq-yn-ZOe" firstAttribute="centerX" secondItem="X5a-nX-z17" secondAttribute="centerX" id="uhe-lx-RaA"/>
+                            <constraint firstItem="Oei-iT-OrY" firstAttribute="top" secondItem="dbl-az-h2b" secondAttribute="bottom" constant="20" id="wvt-8k-AlA"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="9Uj-Xv-yb9"/>
+                                <exclude reference="TVt-6L-cY9"/>
+                                <exclude reference="lPB-09-1dI"/>
+                                <exclude reference="PbF-qP-Lam"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="タイマー" id="yJ1-cV-9eD">
+                        <barButtonItem key="leftBarButtonItem" title="記録せずに戻る" id="DOx-Ol-TkY">
+                            <connections>
+                                <segue destination="5Dq-WJ-8x7" kind="unwind" identifier="backToTaskListFromTimerWithoutDoingAnything" unwindAction="backToTaskListView:" id="VJj-AN-6Kw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="currentTimerLabel" destination="dbl-az-h2b" id="3u3-3r-LTb"/>
+                        <outlet property="finishBtn" destination="XMT-hA-g24" id="7Cm-Jp-5lJ"/>
+                        <outlet property="playPauseBtn" destination="Agq-yn-ZOe" id="j12-2O-BHW"/>
+                        <outlet property="restTimeLabel" destination="NNd-4a-4mZ" id="apG-DT-SdE"/>
+                        <outlet property="taskNameTextLabel" destination="9I3-m9-CU7" id="5yw-pO-Dxl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6RH-Vz-tGd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="5Dq-WJ-8x7" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2296.5" y="-850.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ylc-0W-Hav">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Eo-pk-sij" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hEB-Gh-WFs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="eU7-St-tEu" kind="relationship" relationship="rootViewController" id="Vll-gm-mEa"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rkk-yj-rFS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1825.5" y="-850.5"/>
+        </scene>
+        <!--詳細データ-->
+        <scene sceneID="bDH-o9-KoW">
+            <objects>
+                <viewController id="n4J-cE-ka5" customClass="DisplayTaskDataViewController" customModule="TickStack" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="73I-GV-QbI"/>
+                        <viewControllerLayoutGuide type="bottom" id="AXi-Qi-kVK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fs0-Tj-wTt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1212時間32分23秒" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zqu-qF-ea2">
+                                <rect key="frame" x="76" y="128" width="170" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="タスクを開始した日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGd-wl-ex7">
+                                <rect key="frame" x="93" y="176" width="135" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016年4月12日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMt-nz-qoE">
+                                <rect key="frame" x="91" y="204" width="139" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="タスクに捧げた日数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="doy-Po-wiB">
+                                <rect key="frame" x="93" y="258" width="135" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="254日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Eh-JN-dUU">
+                                <rect key="frame" x="132" y="286" width="57" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目標通り達成できた日数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9lZ-z1-YBU">
+                                <rect key="frame" x="78" y="340" width="165" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="208日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fH-5T-dfJ">
+                                <rect key="frame" x="132" y="368" width="57" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="総累計時間" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="En8-nw-Lwe">
+                                <rect key="frame" x="123" y="94" width="75" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8fH-5T-dfJ" firstAttribute="top" secondItem="9lZ-z1-YBU" secondAttribute="bottom" constant="10" id="30O-6O-il4"/>
+                            <constraint firstItem="doy-Po-wiB" firstAttribute="top" secondItem="tMt-nz-qoE" secondAttribute="bottom" constant="30" id="5HK-60-q8c"/>
+                            <constraint firstItem="3Eh-JN-dUU" firstAttribute="centerX" secondItem="fs0-Tj-wTt" secondAttribute="centerX" id="G6e-ye-Pvj"/>
+                            <constraint firstItem="tMt-nz-qoE" firstAttribute="centerX" secondItem="fs0-Tj-wTt" secondAttribute="centerX" id="J8j-Yd-Cd8"/>
+                            <constraint firstItem="RGd-wl-ex7" firstAttribute="top" secondItem="Zqu-qF-ea2" secondAttribute="bottom" constant="30" id="M3t-Eg-0lW"/>
+                            <constraint firstItem="RGd-wl-ex7" firstAttribute="centerX" secondItem="fs0-Tj-wTt" secondAttribute="centerX" id="ONX-yP-FJj"/>
+                            <constraint firstItem="En8-nw-Lwe" firstAttribute="centerX" secondItem="fs0-Tj-wTt" secondAttribute="centerX" id="Rz9-p3-Itz"/>
+                            <constraint firstItem="doy-Po-wiB" firstAttribute="centerX" secondItem="fs0-Tj-wTt" secondAttribute="centerX" id="dBv-MS-hbc"/>
+                            <constraint firstItem="3Eh-JN-dUU" firstAttribute="top" secondItem="doy-Po-wiB" secondAttribute="bottom" constant="10" id="dol-FM-TCJ"/>
+                            <constraint firstItem="tMt-nz-qoE" firstAttribute="top" secondItem="RGd-wl-ex7" secondAttribute="bottom" constant="10" id="eCZ-ec-XJQ"/>
+                            <constraint firstItem="9lZ-z1-YBU" firstAttribute="top" secondItem="3Eh-JN-dUU" secondAttribute="bottom" constant="30" id="ekJ-wX-eyc"/>
+                            <constraint firstItem="9lZ-z1-YBU" firstAttribute="centerX" secondItem="fs0-Tj-wTt" secondAttribute="centerX" id="iz9-qE-D8I"/>
+                            <constraint firstItem="8fH-5T-dfJ" firstAttribute="centerX" secondItem="fs0-Tj-wTt" secondAttribute="centerX" id="qXc-fb-xyc"/>
+                            <constraint firstItem="Zqu-qF-ea2" firstAttribute="centerX" secondItem="fs0-Tj-wTt" secondAttribute="centerX" id="rEw-wy-Ujj"/>
+                            <constraint firstItem="Zqu-qF-ea2" firstAttribute="top" secondItem="En8-nw-Lwe" secondAttribute="bottom" constant="10" id="rXJ-Un-cvf"/>
+                            <constraint firstItem="En8-nw-Lwe" firstAttribute="top" secondItem="73I-GV-QbI" secondAttribute="bottom" constant="30" id="tpv-zo-sn4"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="詳細データ" id="h8a-lp-m27">
+                        <barButtonItem key="leftBarButtonItem" title="一覧へ" id="CJY-R7-bNx">
+                            <connections>
+                                <segue destination="X9k-sV-QUr" kind="unwind" unwindAction="backToDataSourceListView:" id="c7X-eH-Ge2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="firstDateTextLabel" destination="tMt-nz-qoE" id="y6x-AQ-LdF"/>
+                        <outlet property="totalDevoteDateTextLabel" destination="3Eh-JN-dUU" id="bgO-uG-q4D"/>
+                        <outlet property="totalStockedTimeTextLavel" destination="Zqu-qF-ea2" id="23h-JU-GJD"/>
+                        <outlet property="totalSuccessDateTextLabel" destination="8fH-5T-dfJ" id="IXa-Y1-nuG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R6q-Yy-BpE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="X9k-sV-QUr" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1374" y="26"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Database-30" width="30" height="30"/>
+        <image name="Pause Filled-30" width="30" height="30"/>
         <image name="Pause Filled-50" width="50" height="50"/>
         <image name="Timer-30" width="30" height="30"/>
         <image name="checked" width="64" height="64"/>
