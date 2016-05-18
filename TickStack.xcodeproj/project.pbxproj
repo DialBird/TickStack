@@ -29,7 +29,6 @@
 		25D5F5011CE5A96C00A0A8F6 /* EditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5F5001CE5A96C00A0A8F6 /* EditTaskViewController.swift */; };
 		25D5F5031CE5D36C00A0A8F6 /* DataSourceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5F5021CE5D36C00A0A8F6 /* DataSourceListViewController.swift */; };
 		25D5F5051CE5D74300A0A8F6 /* DisplayTaskDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5F5041CE5D74300A0A8F6 /* DisplayTaskDataViewController.swift */; };
-		25D5F5071CE5E39800A0A8F6 /* Carthage in Resources */ = {isa = PBXBuildFile; fileRef = 25D5F5061CE5E39800A0A8F6 /* Carthage */; };
 		25F86E9F1CE714FA00D32DFC /* TPKeyboardAvoidingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25F86E9E1CE714FA00D32DFC /* TPKeyboardAvoidingKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -216,7 +215,6 @@
 				255E53E21CD718350029E83A /* LaunchScreen.storyboard in Resources */,
 				255E53DF1CD718350029E83A /* Assets.xcassets in Resources */,
 				255E53DD1CD718350029E83A /* Main.storyboard in Resources */,
-				25D5F5071CE5E39800A0A8F6 /* Carthage in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
