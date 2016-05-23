@@ -21,7 +21,7 @@ class DisplayTaskDataViewController: UIViewController {
     
     //モデルの格納
     var taskDataSourceManager = TaskDataSourceManager.sharedInstance
-    
+    var dayChangeManager = DayChangeManager.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,7 @@ class DisplayTaskDataViewController: UIViewController {
         totalStockedTimeTextLavel.text = "\(time.hour)時間\(time.minute)分\(time.second)秒"
         
         //開始日
-        firstDateTextLabel.text = convertNSDateIntoCalenderString(taskDataSource.firstDay)
+        firstDateTextLabel.text = dayChangeManager.convertNSDateIntoCalenderString(taskDataSource.firstDay)
         
         //タスクに捧げた時間
         totalDevoteDateTextLabel.text = "\(taskDataSource.numOfPassedDate)日"

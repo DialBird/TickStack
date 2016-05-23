@@ -63,11 +63,7 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TaskListViewController.updateTable), name: "taskDeleted", object: nil)
         
         //本日の日付の表示
-        let calendarParts: (year: Int, month: Int, day: Int) = convertNSDateIntoCalenderParts(NSDate())
-        let year: Int = calendarParts.year
-        let month: Int = calendarParts.month
-        let day: Int = calendarParts.day
-        dateTellerTextLabel.text = "\(year)/\(month)/\(day)の状況"
+        dateTellerTextLabel.text = "\(dayChangeManager.convertNSDateIntoCalenderString(NSDate()))の状況"
         
         //もしも前に登録したLastDayオブジェクトがなければ初期化したものを保存する
         dayChangeManager.checkStoredDataExists()

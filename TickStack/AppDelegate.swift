@@ -156,21 +156,21 @@ func convertTimeIntoString(hour: Int, minute: Int, second: Int)->String{
 }
 
 //NSDateを年月日に変更して文字列にする
-func convertNSDateIntoCalenderParts(date: NSDate)->(year: Int, month: Int, day: Int){
-    let cal = NSCalendar(identifier: NSCalendarIdentifierGregorian)
-    let year: Int = cal!.component(.Year, fromDate: date)
-    let month: Int = cal!.component(.Month, fromDate: date)
-    let day: Int = cal!.component(.Day, fromDate: date)
-    return (year,month,day)
-}
+//func convertNSDateIntoCalenderParts(date: NSDate)->(year: Int, month: Int, day: Int){
+//    let cal = NSCalendar(identifier: NSCalendarIdentifierGregorian)
+//    let year: Int = cal!.component(.Year, fromDate: date)
+//    let month: Int = cal!.component(.Month, fromDate: date)
+//    let day: Int = cal!.component(.Day, fromDate: date)
+//    return (year,month,day)
+//}
 
 
-func convertNSDateIntoCalenderString(date: NSDate)->String{
-    let calendarParts: (year: Int, month: Int, day: Int) = convertNSDateIntoCalenderParts(date)
-    let year: Int = calendarParts.year
-    let month: Int = calendarParts.month
-    let day: Int = calendarParts.day
-    return "\(year)年\(month)月\(day)日"
-}
+//func convertNSDateIntoCalenderString(date: NSDate)->String{
+//    let calendarParts: (year: Int, month: Int, day: Int) = convertNSDateIntoCalenderParts(date)
+//    let year: Int = calendarParts.year
+//    let month: Int = calendarParts.month
+//    let day: Int = calendarParts.day
+//    return "\(year)年\(month)月\(day)日"
+//}
 
 

@@ -53,4 +53,22 @@ class DayChangeManager: NSObject {
         })
     }
     
+    //NSDateを年月日に変更する
+    func convertNSDateIntoCalenderParts(date: NSDate)->(year: Int, month: Int, day: Int){
+        let cal = NSCalendar(identifier: NSCalendarIdentifierGregorian)
+        let year: Int = cal!.component(.Year, fromDate: date)
+        let month: Int = cal!.component(.Month, fromDate: date)
+        let day: Int = cal!.component(.Day, fromDate: date)
+        return (year,month,day)
+    }
+    
+    //NSDateを年月日を表示する文字列にする
+    func convertNSDateIntoCalenderString(date: NSDate)->String{
+        let calendarParts: (year: Int, month: Int, day: Int) = convertNSDateIntoCalenderParts(date)
+        let year: Int = calendarParts.year
+        let month: Int = calendarParts.month
+        let day: Int = calendarParts.day
+        return "\(year)/\(month)/\(day)"
+    }
+    
 }
