@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 //このViewControllerのモード
 enum CreateOrEditTaskViewControllerMode{
     case Create
@@ -20,7 +19,7 @@ class CreateOrEditTaskViewController: UIViewController, UIPickerViewDataSource, 
     //UIキャッシュ
     @IBOutlet weak var newTaskNameTextField: UITextField!
     @IBOutlet weak var timeTextField: UITextField!
-    @IBOutlet weak var createBtn: UIButton!
+    @IBOutlet weak var createBtn: CustomMainButton!
     
     //現在の画面を、「新規作成モード」と「編集モード」とできりかえる
     var nowMode: CreateOrEditTaskViewControllerMode!
@@ -48,7 +47,7 @@ class CreateOrEditTaskViewController: UIViewController, UIPickerViewDataSource, 
             
             //タイトル変更
             title = "タスク編集"
-            createBtn.setTitle("編集", forState: .Normal)
+            createBtn.changeTitle("編集", forState: .Normal)
             
             //前のページから渡ってきたindexからtaskを特定し、必要な情報を手にいれて、textfieldに記載する
             let taskCellData: TaskCellData = taskCellDataManager.taskCellDataList.list[selectedTaskIndex]
@@ -58,12 +57,11 @@ class CreateOrEditTaskViewController: UIViewController, UIPickerViewDataSource, 
             timeTextField.text = "\(currentTaskGoalMinute)"
             
         }else{
+            nowMode = .Create
             
             //タイトル変更
             title = "新規タスク作成"
-            createBtn.setTitle("作成", forState: .Normal)
-            
-            nowMode = .Create
+            createBtn.changeTitle("作成", forState: .Normal)
         }
         
         
@@ -80,11 +78,6 @@ class CreateOrEditTaskViewController: UIViewController, UIPickerViewDataSource, 
         timePicker.tag = 1
         timeTextField.inputView = timePicker
         timeTextField.inputAccessoryView = PickerToolBar
-        
-        //ボタンを修飾
-        createBtn.layer.borderWidth = 2
-        createBtn.layer.borderColor = UIColor.getStrongGreen().CGColor
-        createBtn.layer.cornerRadius = createBtn.bounds.height/2
     }
     
     
@@ -161,9 +154,6 @@ class CreateOrEditTaskViewController: UIViewController, UIPickerViewDataSource, 
     
     //MARK: - IBAction
     
-    @IBAction func tapDownCreateBtn(sender: UIButton) {
-        createBtn.backgroundColor = UIColor.getMainGreen()
-    }
     @IBAction func tapUpCreateBtn(sender: UIButton) {
         createBtn.backgroundColor = UIColor.clearColor()
         

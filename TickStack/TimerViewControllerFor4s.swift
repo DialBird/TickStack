@@ -56,14 +56,6 @@ class TimerViewControllerFor4s: UIViewController {
         playPauseBtn.layer.borderColor = UIColor.getStrongPink().CGColor
         playPauseBtn.imageView?.image = UIImage(named: "Pause Filled-30")
         
-        finishBtn.layer.borderWidth = 2
-        finishBtn.layer.borderColor = UIColor.getStrongGreen().CGColor
-        finishBtn.layer.cornerRadius = finishBtn.bounds.height/2
-        
-        //バックグラウンドに入ったか、バックグラウンドから戻ったかの通知を受け取る(タイマーはバックグラウンドでも勝手に動いてくれる？)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.enterBackground), name: "applicationWillResignActive", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.enterForeground), name: "applicationDidBecomeActive", object: nil)
-        
         //ナビゲーションバーの色を決定
         self.navigationController?.navigationBar.barTintColor = UIColor.getMainGreen()
     }
@@ -72,16 +64,26 @@ class TimerViewControllerFor4s: UIViewController {
     }
     
     
-    //画面のライフサイクル関係------------------------------------------------------
+    
+    
+    
+    //MARK: - lifeSycle
+    
     override func viewWillAppear(animated: Bool) {
         timerOn()
+        
+        //バックグラウンドに入ったか、バックグラウンドから戻ったかの通知を受け取る(タイマーはバックグラウンドでも勝手に動いてくれる？)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.enterBackground), name: "applicationWillResignActive", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.enterForeground), name: "applicationDidBecomeActive", object: nil)
     }
     override func viewWillDisappear(animated: Bool) {
         timerOff()
+        
+        //通知オブサーバーを削除
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    
-    //タイマー発動中にバックグラウンドに入った場合の処理------------------------------------------------------
+    //オブサーバーによって実行される関数
     func enterBackground()->Void{
         if timerRunning{
             timerOff()
@@ -99,7 +101,11 @@ class TimerViewControllerFor4s: UIViewController {
     }
     
     
-    //タイマーをオン、オフする関数------------------------------------------------------
+    
+    
+    
+    //MARK: - timer
+    
     func timerOn()->Void{
         timerRunning = true
         timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(TimerViewController.update), userInfo: nil, repeats: true)
@@ -109,7 +115,7 @@ class TimerViewControllerFor4s: UIViewController {
         timer.invalidate()
     }
     
-    //タイマーで更新される関数------------------------------------------------------
+    //タイマーで更新される関数
     func update(){
         //カウンターにインターバル分追加
         counter += timerInterval
@@ -140,14 +146,6 @@ class TimerViewControllerFor4s: UIViewController {
             playPauseBtn.layer.borderColor = UIColor.getStrongPink().CGColor
             playPauseBtn.setImage(UIImage(named: "Pause Filled-30"), forState: .Normal)
         }
-    }
-    
-    
-    @IBAction func tapDownFinishBtn(sender: UIButton) {
-        finishBtn.backgroundColor = UIColor.getMainGreen()
-    }
-    @IBAction func tapUpFinishBtn(sender: UIButton) {
-        finishBtn.backgroundColor = UIColor.clearColor()
     }
     
     //画面遷移------------------------------------------------------

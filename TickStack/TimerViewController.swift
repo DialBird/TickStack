@@ -55,10 +55,6 @@ class TimerViewController: UIViewController {
         playPauseBtn.layer.borderColor = UIColor.getStrongPink().CGColor
         playPauseBtn.imageView?.image = UIImage(named: "Pause Filled-50")
         
-        finishBtn.layer.borderWidth = 2
-        finishBtn.layer.borderColor = UIColor.getStrongGreen().CGColor
-        finishBtn.layer.cornerRadius = finishBtn.bounds.height/2
-        
         //ナビゲーションバーの色を決定
         self.navigationController?.navigationBar.barTintColor = UIColor.getMainGreen()
     }
@@ -67,7 +63,11 @@ class TimerViewController: UIViewController {
     }
     
     
-    //画面のライフサイクル関係------------------------------------------------------
+    
+    
+    
+    //MARK: - lifeSycle
+    
     override func viewWillAppear(animated: Bool) {
         timerOn()
         
@@ -82,8 +82,7 @@ class TimerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    
-    //タイマー発動中にバックグラウンドに入った場合の処理------------------------------------------------------
+    //オブサーバーによって実行される関数
     func enterBackground()->Void{
         if timerRunning{
             timerOff()
@@ -101,7 +100,11 @@ class TimerViewController: UIViewController {
     }
     
     
-    //タイマーをオン、オフする関数------------------------------------------------------
+    
+    
+    
+    //MARK: - timer
+    
     func timerOn()->Void{
         timerRunning = true
         timer = NSTimer.scheduledTimerWithTimeInterval(timerInterval, target: self, selector: #selector(TimerViewController.update), userInfo: nil, repeats: true)
@@ -111,7 +114,7 @@ class TimerViewController: UIViewController {
         timer.invalidate()
     }
     
-    //タイマーで更新される関数------------------------------------------------------
+    //タイマーで更新される関数
     func update(){
         
         //カウンターにインターバル分追加
@@ -145,13 +148,6 @@ class TimerViewController: UIViewController {
         }
     }
     
-    
-    @IBAction func tapDownFinishBtn(sender: UIButton) {
-        finishBtn.backgroundColor = UIColor.getMainGreen()
-    }
-    @IBAction func tapUpFinishBtn(sender: UIButton) {
-        finishBtn.backgroundColor = UIColor.clearColor()
-    }
     
     //画面遷移------------------------------------------------------
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
