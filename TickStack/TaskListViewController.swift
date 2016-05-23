@@ -224,7 +224,7 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
             nextVC.selectedTaskIndex = selectedTaskIndex
         }
         if segue.identifier == "toEditTaskSegue"{
-            let nextVC = segue.destinationViewController as! EditTaskViewController
+            let nextVC = segue.destinationViewController as! CreateOrEditTaskViewController
             nextVC.selectedTaskIndex = selectedTaskIndex
         }
     }
@@ -239,10 +239,14 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     //タイマー画面で時間を保存しつつ帰って来る
     @IBAction func backToTaskListView(segue: UIStoryboardSegue){}
     
-    //編集ボタンを押した時
+    //左上の編集ボタンを押した時
     @IBAction func tapEditButton(sender: UIBarButtonItem) {
         isInEditMode = !isInEditMode
         tableView.setEditing(isInEditMode, animated: true)
+    }
+    //右上の追加ボタンを押した時
+    @IBAction func tapAddButton(sender: UIBarButtonItem) {
+        performSegueWithIdentifier("toCreateTaskSegue", sender: nil)
     }
 }
 

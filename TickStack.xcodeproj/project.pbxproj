@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		250783551CDCC84800485CD5 /* CreateNewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250783541CDCC84800485CD5 /* CreateNewTaskViewController.swift */; };
 		250F0F071CF2BB0E0095DDB1 /* TaskCellDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250F0F061CF2BB0E0095DDB1 /* TaskCellDataManager.swift */; };
 		250F0F091CF2BB4F0095DDB1 /* TaskDataSourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250F0F081CF2BB4F0095DDB1 /* TaskDataSourceManager.swift */; };
 		250F0F0B1CF2BB960095DDB1 /* DayChangeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250F0F0A1CF2BB960095DDB1 /* DayChangeManager.swift */; };
+		250F0F0E1CF2C6710095DDB1 /* CreateOrEditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250F0F0D1CF2C6710095DDB1 /* CreateOrEditTaskViewController.swift */; };
 		251D21601CE9A39E00A5AC6D /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 251D215F1CE9A39E00A5AC6D /* DZNEmptyDataSet.framework */; };
 		251D21621CEAE1A000A5AC6D /* TimerViewControllerFor4s.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251D21611CEAE1A000A5AC6D /* TimerViewControllerFor4s.swift */; };
 		2527DA7E1CE883B4002F17B2 /* LastDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2527DA7D1CE883B4002F17B2 /* LastDay.swift */; };
@@ -27,7 +27,6 @@
 		25916A0D1CE08B90005D7386 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259169B31CE02831005D7386 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		25916A0F1CE08B94005D7386 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259169B61CE0283D005D7386 /* RealmSwift.framework */; };
 		25916A101CE08B94005D7386 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259169B61CE0283D005D7386 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		25D5F5011CE5A96C00A0A8F6 /* EditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5F5001CE5A96C00A0A8F6 /* EditTaskViewController.swift */; };
 		25D5F5031CE5D36C00A0A8F6 /* DataSourceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5F5021CE5D36C00A0A8F6 /* DataSourceListViewController.swift */; };
 		25D5F5051CE5D74300A0A8F6 /* DisplayTaskDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5F5041CE5D74300A0A8F6 /* DisplayTaskDataViewController.swift */; };
 		25F86E9F1CE714FA00D32DFC /* TPKeyboardAvoidingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25F86E9E1CE714FA00D32DFC /* TPKeyboardAvoidingKit.framework */; };
@@ -49,10 +48,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		250783541CDCC84800485CD5 /* CreateNewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewTaskViewController.swift; sourceTree = "<group>"; };
 		250F0F061CF2BB0E0095DDB1 /* TaskCellDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCellDataManager.swift; sourceTree = "<group>"; };
 		250F0F081CF2BB4F0095DDB1 /* TaskDataSourceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDataSourceManager.swift; sourceTree = "<group>"; };
 		250F0F0A1CF2BB960095DDB1 /* DayChangeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayChangeManager.swift; sourceTree = "<group>"; };
+		250F0F0D1CF2C6710095DDB1 /* CreateOrEditTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateOrEditTaskViewController.swift; sourceTree = "<group>"; };
 		251D215F1CE9A39E00A5AC6D /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = Carthage/Build/iOS/DZNEmptyDataSet.framework; sourceTree = "<group>"; };
 		251D21611CEAE1A000A5AC6D /* TimerViewControllerFor4s.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewControllerFor4s.swift; sourceTree = "<group>"; };
 		2527DA7D1CE883B4002F17B2 /* LastDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastDay.swift; sourceTree = "<group>"; };
@@ -69,7 +68,6 @@
 		259169B31CE02831005D7386 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		259169B61CE0283D005D7386 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		25916A0A1CE07E2B005D7386 /* TaskDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDataSource.swift; sourceTree = "<group>"; };
-		25D5F5001CE5A96C00A0A8F6 /* EditTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTaskViewController.swift; sourceTree = "<group>"; };
 		25D5F5021CE5D36C00A0A8F6 /* DataSourceListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceListViewController.swift; sourceTree = "<group>"; };
 		25D5F5041CE5D74300A0A8F6 /* DisplayTaskDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayTaskDataViewController.swift; sourceTree = "<group>"; };
 		25D5F5061CE5E39800A0A8F6 /* Carthage */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Carthage; sourceTree = "<group>"; };
@@ -108,8 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				255E53D71CD718350029E83A /* TaskListViewController.swift */,
-				250783541CDCC84800485CD5 /* CreateNewTaskViewController.swift */,
-				25D5F5001CE5A96C00A0A8F6 /* EditTaskViewController.swift */,
+				250F0F0D1CF2C6710095DDB1 /* CreateOrEditTaskViewController.swift */,
 				259169A61CE01C6C005D7386 /* TimerViewController.swift */,
 				251D21611CEAE1A000A5AC6D /* TimerViewControllerFor4s.swift */,
 				25D5F5021CE5D36C00A0A8F6 /* DataSourceListViewController.swift */,
@@ -274,9 +271,8 @@
 				255E53D61CD718350029E83A /* AppDelegate.swift in Sources */,
 				251D21621CEAE1A000A5AC6D /* TimerViewControllerFor4s.swift in Sources */,
 				255E53D81CD718350029E83A /* TaskListViewController.swift in Sources */,
-				25D5F5011CE5A96C00A0A8F6 /* EditTaskViewController.swift in Sources */,
-				250783551CDCC84800485CD5 /* CreateNewTaskViewController.swift in Sources */,
 				25D5F5051CE5D74300A0A8F6 /* DisplayTaskDataViewController.swift in Sources */,
+				250F0F0E1CF2C6710095DDB1 /* CreateOrEditTaskViewController.swift in Sources */,
 				25916A0B1CE07E2B005D7386 /* TaskDataSource.swift in Sources */,
 				250F0F0B1CF2BB960095DDB1 /* DayChangeManager.swift in Sources */,
 				250F0F091CF2BB4F0095DDB1 /* TaskDataSourceManager.swift in Sources */,

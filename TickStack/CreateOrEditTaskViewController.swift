@@ -1,26 +1,35 @@
 //
-//  CreateNewTaskView.swift
-//  Skimile
+//  CreateOrEditTaskViewController.swift
+//  TickStack
 //
-//  Created by Taniguchi Keisuke on 2016/05/06.
+//  Created by Taniguchi Keisuke on 2016/05/23.
 //  Copyright © 2016年 Taniguchi Keisuke. All rights reserved.
 //
 
-
 import UIKit
 
-class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+
+//このViewControllerのモード
+enum CreateOrEditTaskViewControllerMode{
+    case Create
+    case Edit
+}
+
+class CreateOrEditTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
     //UIキャッシュ
     @IBOutlet weak var newTaskNameTextField: UITextField!
     @IBOutlet weak var timeTextField: UITextField!
     @IBOutlet weak var createBtn: UIButton!
     
+    //現在の画面を、「新規作成モード」と「編集モード」とできりかえる
+    var nowMode: CreateOrEditTaskViewControllerMode!
+    
+    //編集モードの場合は、選択したタスクのindexが入ってくるが、新規作成モードではnilになる
+    var selectedTaskIndex: Int?
+    
     //pickerリスト（分）
     var timeList: [Int] = [0,5,10,15,20,25,30,40,50,60,70,80,90]
-    
-    //表示している時間
-    var selectedMinute: Int = 0
     
     //Modelを格納
     var taskCellDataManager = TaskCellDataManager.sharedInstance
@@ -33,10 +42,35 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
         //デリゲートを登録(引っ込める処理を入れるため)
         newTaskNameTextField.delegate = self
         
+        //index番号が入っていた場合は「編集モード」になる
+        if let selectedTaskIndex = selectedTaskIndex{
+            nowMode = .Edit
+            
+            //タイトル変更
+            title = "タスク編集"
+            createBtn.setTitle("編集", forState: .Normal)
+            
+            //前のページから渡ってきたindexからtaskを特定し、必要な情報を手にいれて、textfieldに記載する
+            let taskCellData: TaskCellData = taskCellDataManager.taskCellDataList.list[selectedTaskIndex]
+            let currentTaskName = taskCellData.taskName
+            let currentTaskGoalMinute = taskCellData.taskGoalMinute
+            newTaskNameTextField.text = currentTaskName
+            timeTextField.text = "\(currentTaskGoalMinute)"
+            
+        }else{
+            
+            //タイトル変更
+            title = "新規タスク作成"
+            createBtn.setTitle("作成", forState: .Normal)
+            
+            nowMode = .Create
+        }
+        
+        
         //pickerにつけるツールバー
         let PickerToolBar = UIToolbar(frame: CGRectMake(0,0,self.view.frame.width,40))
         PickerToolBar.barStyle = .Default
-        let PickerDoneBtn = UIBarButtonItem(title: "Done", style: .Done, target: self, action: #selector(CreateNewTaskViewController.PickDone))
+        let PickerDoneBtn = UIBarButtonItem(title: "Done", style: .Done, target: self, action: #selector(CreateOrEditTaskViewController.PickDone))
         PickerToolBar.items = [PickerDoneBtn]
         
         //pickerをtextFieldへ追加
@@ -46,7 +80,6 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
         timePicker.tag = 1
         timeTextField.inputView = timePicker
         timeTextField.inputAccessoryView = PickerToolBar
-        timeTextField.text = "\(selectedMinute)"
         
         //ボタンを修飾
         createBtn.layer.borderWidth = 2
@@ -89,7 +122,6 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView.tag == 1{
             timeTextField.text = "\(timeList[row])"
-            selectedMinute = timeList[row]
         }
     }
     
@@ -112,13 +144,14 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "backToTaskListFromCreateTaskSegue"{
-            
-            //移動する際に新しいタスクをtaskCellDataとtaskDataSourceの両方に登録する
             let newTaskName: String = newTaskNameTextField.text!
-            let taskGoalMinute: Int = Int(timeTextField.text!)!
-            
-            taskCellDataManager.add(newTaskName, newTaskGoalMinute: taskGoalMinute)
-            taskDataSourceManager.add(newTaskName, firstDate: NSDate())
+            let newTaskGoalMinute: Int = Int(timeTextField.text!)!
+            if nowMode == .Edit{
+                taskCellDataManager.edit(selectedTaskIndex!, newTaskName: newTaskName, newTaskGoalMinute: newTaskGoalMinute)
+            }else{
+                taskCellDataManager.add(newTaskName, newTaskGoalMinute: newTaskGoalMinute)
+                taskDataSourceManager.add(newTaskName, firstDate: NSDate())
+            }
         }
     }
     
@@ -143,16 +176,15 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
         }else if timeTextField.text == "0"{
             displayAlert(2)
             return
-        }else if Int(timeTextField.text!) == nil{
-            displayAlert(3)
-            return
         }
         
         //名前がかぶっていたらエラーを返す
         var isNewTask: Bool = true
-        taskCellDataManager.taskCellDataList.list.forEach{(taskCellData)->Void in
-            if taskCellData.taskName == newTaskNameTextField.text!{
-                displayAlert(4)
+        for taskCellData in taskCellDataManager.taskCellDataList.list.enumerate(){
+            //もしEditモードであれば、現在のindex番号はスキップするように
+            if nowMode == .Edit && taskCellData.index == selectedTaskIndex{continue}
+            if taskCellData.element.taskName == newTaskNameTextField.text!{
+                displayAlert(3)
                 isNewTask = false
             }
         }
@@ -162,7 +194,11 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
     }
     
     
-    //アラートを出す関数------------------------------------------------------
+    
+    
+    
+    //MARK: - Alert
+    
     func displayAlert(num: Int){
         var subTitle: String!
         if num == 0{
@@ -172,8 +208,6 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
         }else if num == 2{
             subTitle = "目標時間が0になっています"
         }else if num == 3{
-            subTitle = "数字を入力してください"
-        }else if num == 4{
             subTitle = "そのタスクはもう存在しています"
         }
         let alertController = UIAlertController(title: "入力が済んでいません", message: subTitle, preferredStyle: .Alert)
@@ -181,9 +215,3 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
         presentViewController(alertController, animated: true, completion: nil)
     }
 }
-
-
-
-
-
-
