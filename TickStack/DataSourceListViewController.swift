@@ -10,11 +10,14 @@ import UIKit
 import DZNEmptyDataSet
 
 class DataSourceListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     //次のページに送信するインデックス
     var selectedTaskIndex: Int!
+    
+    //モデルを格納する
+    var taskDataSourceManager = TaskDataSourceManager.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +42,11 @@ class DataSourceListViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     
-    //ページを表示するたびに起動する------------------------------------------------------
+    
+    
+    
+    //MARK: - lifeSycle
+    
     override func viewWillAppear(animated: Bool) {
         updateTable()
     }
@@ -49,13 +56,17 @@ class DataSourceListViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     
-    //tableViewプロトコル------------------------------------------------------
+    
+    
+    
+    //MARK: - tableView
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskDataSourceList.list.count
+        return taskDataSourceManager.taskDataSourceList.list.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("dataSourceViewTaskCell",forIndexPath: indexPath)
-        cell.textLabel?.text = taskDataSourceList.list[indexPath.row].taskName
+        cell.textLabel?.text = taskDataSourceManager.taskDataSourceList.list[indexPath.row].taskName
         return cell
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -70,7 +81,11 @@ class DataSourceListViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     
-    //DZNプロトコル------------------------------------------------------
+    
+    
+    
+    //MARK: - DZNEmptyDataSet
+    
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         let text: String = "タスクが登録されていません"
         let attr = [NSFontAttributeName: UIFont.systemFontOfSize(15)]
@@ -85,7 +100,12 @@ class DataSourceListViewController: UIViewController, UITableViewDataSource, UIT
         return UIImage(named: "empty")
     }
     
-    //ページ遷移(どっちの場合でも実質同じ)
+    
+    
+    
+    
+    //MARK: - Segue
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toDisplayTaskDataSegue"{
             let nextVC = segue.destinationViewController as! DisplayTaskDataViewController
@@ -97,6 +117,11 @@ class DataSourceListViewController: UIViewController, UITableViewDataSource, UIT
         }
     }
     
-    //詳細データページから戻るための関数
+    
+    
+    
+    
+    //MARK: - IBAction
     @IBAction func backToDataSourceListView(segue: UIStoryboardSegue){}
+    
 }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 import DZNEmptyDataSet
 
 class TaskListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate {
@@ -25,7 +24,12 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     //日付が変わったかどうか
     var dayChanged: Bool = false
     
-    //最初の処理------------------------------------------------------
+    //モデルの格納
+    let taskCellDataManager = TaskCellDataManager.sharedInstance
+    let taskDataSourceManager = TaskDataSourceManager.sharedInstance
+    let dayChangeManager = DayChangeManager.sharedInstance
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,6 +49,79 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    
+    
+    
+    
+    //MARK: - lifeSycle
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        //監視対象の追加
+        //taskCellDataListとtaskDataSourceListは基本同時に変更されるので、どちらか片方だけ監視していればいい
+        taskCellDataManager.addObserver(self, forKeyPath: "taskCellDataList", options: .New, context: nil)
+        
+        //本日の日付の表示
+        let calendarParts: (year: Int, month: Int, day: Int) = convertNSDateIntoCalenderParts(NSDate())
+        let year: Int = calendarParts.year
+        let month: Int = calendarParts.month
+        let day: Int = calendarParts.day
+        dateTellerTextLabel.text = "\(year)/\(month)/\(day)の状況"
+        
+        //もしも前に登録したLastDayオブジェクトがなければ初期化したものを保存する
+        dayChangeManager.checkStoredDataExists()
+        
+        //日にちが変わっていたらdayChangedをtrueにする
+        if dayChangeManager.checkDayChange(){
+            dayChanged = true
+        }else{
+            dayChanged = false
+        }
+        
+        //日付の再登録
+        dayChangeManager.saveNowMoment(NSDate())
+        
+        //テーブルビューの更新
+        updateTable()
+    }
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        taskCellDataManager.removeObserver(self, forKeyPath: "taskCellDataList")
+    }
+    
+    
+    
+    
+    
+    //MARK: - Observer
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
+        if keyPath == "taskCellDataList"{
+            updateTable()
+        }
+    }
+    
+    //テーブルをアップロードする
+    func updateTable()->Void{
+        tableView.setEditing(false, animated: true)
+        isInEditMode = false
+        
+        //もし日にちが変わっていたら発動
+        if dayChanged{
+            taskCellDataManager.clearTaskCellDataList()
+        }
+        
+        tableView.reloadData()
+    }
+    
+    
+    
+    
+    
+    //MARK: - DZNEmptyDataSet
+    
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         let text: String = "タスクが登録されていません"
         let attr = [NSFontAttributeName: UIFont.systemFontOfSize(15)]
@@ -59,70 +136,18 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
         return UIImage(named: "empty")
     }
     
-    //繰り返し実行する関数------------------------------------------------------
-    override func viewWillAppear(animated: Bool) {
-        let calendarParts: (year: Int, month: Int, day: Int) = convertNSDateIntoCalenderParts(NSDate())
-        let year: Int = calendarParts.year
-        let month: Int = calendarParts.month
-        let day: Int = calendarParts.day
-        dateTellerTextLabel.text = "\(year)/\(month)/\(day)の状況"
-        
-        //もしも前に登録したLastDayオブジェクトがなければ初期化したものを保存する
-        if realm.objects(LastDay).first == nil{
-            try! realm.write({
-                let lastDay = LastDay()
-                lastDay.date = NSDate()
-                realm.add(lastDay)
-            })
-        }
-        
-        //日にちが変わっていたらdayChangedをtrueにする
-        if checkDayChange(){
-            dayChanged = true
-        }else{
-            dayChanged = false
-        }
-        
-        //日付の再登録
-        try! realm.write({
-            realm.objects(LastDay).first?.date = NSDate()
-        })
-        
-        //テーブルビューの更新
-        updateTable()
-    }
-    
-    //日付が変わったかを判定する
-    func checkDayChange()->Bool{
-        let lastDay: LastDay = realm.objects(LastDay).first!
-        let cal = NSCalendar(identifier: NSCalendarIdentifierGregorian)
-        let sinceLastTimeGap: Double = NSDate().timeIntervalSinceDate(lastDay.date)
-        if sinceLastTimeGap > 60*60*24 || cal!.component(.Day, fromDate: lastDay.date) != cal!.component(.Day, fromDate: NSDate()){
-            return true
-        }else{
-            return false
-        }
-    }
-    
-    //テーブルをアップロードする
-    func updateTable()->Void{
-        tableView.setEditing(false, animated: true)
-        isInEditMode = false
-        tableView.reloadData()
-    }
     
     
-    //tableのプロトコル------------------------------------------------------
+    
+    
+    //MARK: - TableView
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskCellDataList.list.count
+        return taskCellDataManager.taskCellDataList.list.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("taskCell",forIndexPath: indexPath) as! TaskCell
-        let taskCellData = taskCellDataList.list[indexPath.row]
-        if dayChanged{
-            cell.clearCell(taskCellDataList.list[indexPath.row])
-        }
+        let taskCellData = taskCellDataManager.taskCellDataList.list[indexPath.row]
         cell.setCell(taskCellData)
         return cell
     }
@@ -133,14 +158,12 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
         //タップしたセルのindexを次のページに渡す
         selectedTaskIndex = indexPath.row
         
+        //もしこのサイズが4sのものだったら、そのサイズに合わせたviewControllerへ移動する
         if thisIs4s{
             performSegueWithIdentifier("toTimerFor4sSegue", sender: nil)
         }else{
             performSegueWithIdentifier("toTimerViewSegue", sender: nil)
         }
-        
-        //次のページへのセグエを呼び出す
-        
         
         //選択色を落とす
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -154,11 +177,9 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
             let alertController = UIAlertController(title: "タスク削除", message: "削除しますか？\n(ためた時間も消えてしまいます)", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default){
                 (action: UIAlertAction)-> Void in
-                try! realm.write({
-                    taskCellDataList.list.removeAtIndex(indexPath.row)
-                    taskDataSourceList.list.removeAtIndex(indexPath.row)
-                })
-                self.updateTable()
+                
+                self.taskCellDataManager.deleteElement(indexPath.row)
+                self.taskDataSourceManager.deleteElement(indexPath.row)
             }
             alertController.addAction(okAction)
             alertController.addAction(UIAlertAction(title: "cancel", style: .Cancel, handler: nil))
@@ -179,19 +200,16 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
         return true
     }
     func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
-        let target: TaskCellData = taskCellDataList.list[sourceIndexPath.row]
-        let targetTaskDataSource = taskDataSourceList.list[sourceIndexPath.row]
-        try! realm.write({
-            taskCellDataList.list.removeAtIndex(sourceIndexPath.row)
-            taskCellDataList.list.insert(target, atIndex: destinationIndexPath.row)
-            taskDataSourceList.list.removeAtIndex(sourceIndexPath.row)
-            taskDataSourceList.list.insert(targetTaskDataSource, atIndex: destinationIndexPath.row)
-            updateTable()
-        })
+        taskCellDataManager.changeOrder(sourceIndexPath.row, destIndex: destinationIndexPath.row)
+        taskDataSourceManager.changeOrder(sourceIndexPath.row, destIndex: destinationIndexPath.row)
     }
     
     
-    //ページ遷移------------------------------------------------------
+    
+    
+    
+    //MARK: - Segue
+    
     //セグエ呼び出し時に情報を次の画面に送る
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toTimerViewSegue"{
@@ -211,18 +229,21 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     
-    //UnWindSegueで起動する関数------------------------------------------------------
+    
+    
+    
+    //MARK: - IBAction
+    
+    //UnWindSegueで起動する関数
     //タイマー画面で時間を保存しつつ帰って来る
-    //viewWillAppearで処理は記載済み
     @IBAction func backToTaskListView(segue: UIStoryboardSegue){}
     
+    //編集ボタンを押した時
     @IBAction func tapEditButton(sender: UIBarButtonItem) {
         isInEditMode = !isInEditMode
         tableView.setEditing(isInEditMode, animated: true)
     }
-    
-    
-    
 }
+
 
 

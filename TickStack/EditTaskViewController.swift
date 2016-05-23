@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import RealmSwift
 
-class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-
+class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate{
+    
     //UIキャッシュ
     @IBOutlet weak var editTaskNameTextField: UITextField!
     @IBOutlet weak var editTaskTimeTextField: UITextField!
@@ -19,23 +18,23 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     //前のページから渡ってくるインデックス番号
     var selectedTaskIndex: Int!
     
-    //上のインデックス番号からtaskData,taskDataSourceを取得
-    var taskData = TaskCellData()
-    var taskDataSource = TaskDataSource()
-    
     //pickerリスト
     var timeList: [Int] = [0,5,10,15,20,25,30,40,50,60,70,80,90]
     
-    //表示している時間
-    var selectedMinute: Int = 0
-
+    //Modelを格納
+    var taskCellDataManager = TaskCellDataManager.sharedInstance
+    var taskDataSourceManager = TaskDataSourceManager.sharedInstance
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //デリゲートを登録(引っ込める処理を入れるため)
+        editTaskNameTextField.delegate = self
+        
         //前のページから渡ってきたindexからtaskを特定し、必要な情報を手にいれる
-        taskData = taskCellDataList.list[selectedTaskIndex]
-        taskDataSource = taskDataSourceList.list[selectedTaskIndex]
-        selectedMinute = taskData.taskGoalMinute
+        let taskCellData: TaskCellData = taskCellDataManager.taskCellDataList.list[selectedTaskIndex]
+        let currentTaskName = taskCellData.taskName
+        let currentTaskGoalMinute = taskCellData.taskGoalMinute
         
         //pickerにつけるツールバー
         let PickerToolBar = UIToolbar(frame: CGRectMake(0,0,self.view.frame.width,40))
@@ -50,8 +49,8 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         editTaskTimeTextField.inputView = timePicker
         editTaskTimeTextField.inputAccessoryView = PickerToolBar
         
-        editTaskNameTextField.text = taskData.taskName
-        editTaskTimeTextField.text = "\(selectedMinute)"
+        editTaskNameTextField.text = currentTaskName
+        editTaskTimeTextField.text = "\(currentTaskGoalMinute)"
         
         //ボタン修飾
         editBtn.layer.borderWidth = 2
@@ -65,7 +64,22 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     
     
-    //プロトコル------------------------------------------------------
+    
+    
+    
+    //MARK: - textField
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        editTaskNameTextField.resignFirstResponder()
+        return true
+    }
+    
+    
+    
+    
+    
+    //MARK: - PickerView
+    
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         var number: Int!
         if pickerView.tag == 1{
@@ -92,29 +106,35 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     //選択した数字をtextに反映する
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView.tag == 1{
-            selectedMinute = timeList[row]
-            editTaskTimeTextField.text = "\(selectedMinute)"
+            editTaskTimeTextField.text = "\(timeList[row])"
         }
     }
     
-    //ページ遷移------------------------------------------------------
+    
+    
+    
+    
+    
+    //MARK: - Segue
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "backToTaskListFromEditTaskSegue"{
             
             //編集を加える
-            try! realm.write({
-                //taskCellDataに変更
-                taskData.taskName = editTaskNameTextField.text!
-                taskData.taskGoalMinute = selectedMinute
-                //taskDataSourceに変更
-                taskDataSource.taskName = editTaskNameTextField.text!
-            })
+            let newTaskName: String = editTaskNameTextField.text!
+            let newTaskGoalMinute: Int = Int(editTaskTimeTextField.text!)!
+            taskCellDataManager.edit(selectedTaskIndex, newTaskName: newTaskName, newTaskGoalMinute: newTaskGoalMinute)
+            taskDataSourceManager.edit(selectedTaskIndex, newTaskName: newTaskName)
         }
     }
-
     
-    //ボタンイベント------------------------------------------------------
+    
+    
+    
+    
+    
+    //MARK: - IBAction
+    
     @IBAction func tapDownEditBtn(sender: UIButton) {
         editBtn.backgroundColor = UIColor.getStrongGreen()
     }
@@ -126,13 +146,13 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         }else if editTaskTimeTextField.text?.characters.count == 0{
             displayAlert(1)
             return
-        }else if selectedMinute == 0{
+        }else if Int(editTaskTimeTextField.text!)! == 0{
             displayAlert(2)
             return
         }
         var isNewTask: Bool = true
         
-        for content in taskCellDataList.list.enumerate(){
+        for content in taskCellDataManager.taskCellDataList.list.enumerate(){
             if content.index == selectedTaskIndex{continue}
             if content.element.taskName == editTaskNameTextField.text!{
                 displayAlert(3)

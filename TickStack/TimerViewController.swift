@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import RealmSwift
 
 class TimerViewController: UIViewController {
-
+    
     //UIパーツをキャッシュ
     @IBOutlet weak var taskNameTextLabel: UILabel!
     @IBOutlet weak var currentTimerLabel: UILabel!
@@ -21,30 +20,33 @@ class TimerViewController: UIViewController {
     //前のページから渡ってくるタスクのインデックス
     var selectedTaskIndex: Int!
     
-    //タスクデータを上のインデックスから取得して格納する
-    var taskData: TaskCellData!
+    //このタイマーを開始する前の時点での残り時間（update関数を発動するたびにこの値を必要とするから）
+    var originalRestSecond: Int!
     
     //タイマーの軌道に必要な変数
     var timer = NSTimer()
     var timerRunning: Bool = false
     var counter: Double = 0
+    let timerInterval: Double = 0.1
     
     //バックグラウンドに入った場合にその瞬間の時間が記録される
     var lastMoment: NSDate?
-
     
-    //最初に実行する関数------------------------------------------------------
+    //Modelを格納
+    var taskCellDataManager = TaskCellDataManager.sharedInstance
+    var taskDataSourceManager = TaskDataSourceManager.sharedInstance
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        taskData = taskCellDataList.list[selectedTaskIndex]
+        let taskCellData: TaskCellData = taskCellDataManager.taskCellDataList.list[selectedTaskIndex]
         
         //前のページから来た情報を使ってページを初期化
         //task名を記載
-        taskNameTextLabel.text = taskData.taskName
+        taskNameTextLabel.text = taskCellData.taskName
         
         //残り時間の表示
-        let restSecond: Int = taskData.getRestSecond()
-        let restTime:(hour: Int, minute: Int, second: Int) = convertSecondIntoTime(restSecond)
+        originalRestSecond = taskCellData.getRestSecond()
+        let restTime:(hour: Int, minute: Int, second: Int) = convertSecondIntoTime(originalRestSecond)
         restTimeLabel.text = convertTimeIntoString(restTime.hour, minute: restTime.minute, second: restTime.second)
         
         //ボタンの修飾
@@ -67,7 +69,7 @@ class TimerViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     
     //画面のライフサイクル関係------------------------------------------------------
     override func viewWillAppear(animated: Bool) {
@@ -99,7 +101,7 @@ class TimerViewController: UIViewController {
     //タイマーをオン、オフする関数------------------------------------------------------
     func timerOn()->Void{
         timerRunning = true
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(TimerViewController.update), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(timerInterval, target: self, selector: #selector(TimerViewController.update), userInfo: nil, repeats: true)
     }
     func timerOff()->Void{
         timerRunning = false
@@ -108,11 +110,14 @@ class TimerViewController: UIViewController {
     
     //タイマーで更新される関数------------------------------------------------------
     func update(){
-        counter += 0.1
+        
+        //カウンターにインターバル分追加
+        counter += timerInterval
         let nowSecond: Int = Int(counter)
-       
-        let newRestSecond: Int = taskData.getRestSecond() - nowSecond
-
+        
+        //現在の残り時間を計算
+        let newRestSecond: Int = originalRestSecond - nowSecond
+        
         //経過時間
         let passTime:(hour: Int, minute: Int, second: Int) = convertSecondIntoTime(nowSecond)
         currentTimerLabel.text = convertTimeIntoString(passTime.hour, minute: passTime.minute, second: passTime.second)
@@ -149,14 +154,8 @@ class TimerViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "backToTaskListFromTimerSegue"{
             //時間を更新する
-            try! realm.write({
-                //変更を読み込ませるためには、直接dynamicないの変数に記載する必要があり？
-                taskData.todaySecondStock += Int(counter)
-                
-                //データソースの方にも追加
-                let taskDataSource = taskDataSourceList.list[selectedTaskIndex]
-                taskDataSource.stockedTime += Int(counter)
-            })
+            taskCellDataManager.stockTimeToSpecificTask(selectedTaskIndex, stockSeconds: Int(counter))
+            taskDataSourceManager.stockTimeToSpecificTask(selectedTaskIndex, stockSeconds: Int(counter))
         }
     }
 }

@@ -8,7 +8,6 @@
 
 
 import UIKit
-import RealmSwift
 
 class TaskCell: UITableViewCell {
     
@@ -25,7 +24,7 @@ class TaskCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
+    
     
     //渡されたデータをセットする------------------------------------------------------
     func setCell(taskData: TaskCellData){
@@ -43,32 +42,5 @@ class TaskCell: UITableViewCell {
         }
     }
     
-    
-    //日にちが変わった時に起動------------------------------------------------------
-    func clearCell(taskData: TaskCellData){
-        
-        let taskIndex: Int = taskCellDataList.list.indexOf(taskData)!
-        let taskDataSource: TaskDataSource = taskDataSourceList.list[taskIndex]
-        
-        //もし達成できた場合は、対応するtaskDataSource情報を呼び出して達成日数に１を追加する
-        if taskData.isCompleted(){
-            try! realm.write({
-                taskDataSource.numOfSuccess += 1
-            })
-        }
-        
-        //もし当日時間を少しでもためていたら、捧げた日数に１を追加する
-        if taskData.todaySecondStock > 0{
-            try! realm.write({
-                taskDataSource.numOfPassedDate += 1
-            })
-        }
-        
-        //TaskCellDataに溜まった秒数をリセットする
-        try! realm.write({
-            taskData.todaySecondStock = 0
-        })
-        
-    }
     
 }

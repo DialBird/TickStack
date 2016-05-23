@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		250783551CDCC84800485CD5 /* CreateNewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250783541CDCC84800485CD5 /* CreateNewTaskViewController.swift */; };
-		251D215E1CE95C2300A5AC6D /* TimerInfoForEnteringBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251D215D1CE95C2300A5AC6D /* TimerInfoForEnteringBackground.swift */; };
+		250F0F071CF2BB0E0095DDB1 /* TaskCellDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250F0F061CF2BB0E0095DDB1 /* TaskCellDataManager.swift */; };
+		250F0F091CF2BB4F0095DDB1 /* TaskDataSourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250F0F081CF2BB4F0095DDB1 /* TaskDataSourceManager.swift */; };
+		250F0F0B1CF2BB960095DDB1 /* DayChangeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250F0F0A1CF2BB960095DDB1 /* DayChangeManager.swift */; };
 		251D21601CE9A39E00A5AC6D /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 251D215F1CE9A39E00A5AC6D /* DZNEmptyDataSet.framework */; };
 		251D21621CEAE1A000A5AC6D /* TimerViewControllerFor4s.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251D21611CEAE1A000A5AC6D /* TimerViewControllerFor4s.swift */; };
 		2527DA7E1CE883B4002F17B2 /* LastDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2527DA7D1CE883B4002F17B2 /* LastDay.swift */; };
@@ -20,7 +22,6 @@
 		255E53EE1CD723EB0029E83A /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255E53ED1CD723EB0029E83A /* TaskCell.swift */; };
 		255E53F01CD7295B0029E83A /* TaskCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255E53EF1CD7295B0029E83A /* TaskCellData.swift */; };
 		259169A71CE01C6C005D7386 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259169A61CE01C6C005D7386 /* TimerViewController.swift */; };
-		259169A91CE01D4E005D7386 /* PercentBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259169A81CE01D4E005D7386 /* PercentBarView.swift */; };
 		25916A0B1CE07E2B005D7386 /* TaskDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25916A0A1CE07E2B005D7386 /* TaskDataSource.swift */; };
 		25916A0C1CE08B90005D7386 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259169B31CE02831005D7386 /* Realm.framework */; };
 		25916A0D1CE08B90005D7386 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259169B31CE02831005D7386 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -49,7 +50,9 @@
 
 /* Begin PBXFileReference section */
 		250783541CDCC84800485CD5 /* CreateNewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewTaskViewController.swift; sourceTree = "<group>"; };
-		251D215D1CE95C2300A5AC6D /* TimerInfoForEnteringBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerInfoForEnteringBackground.swift; sourceTree = "<group>"; };
+		250F0F061CF2BB0E0095DDB1 /* TaskCellDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCellDataManager.swift; sourceTree = "<group>"; };
+		250F0F081CF2BB4F0095DDB1 /* TaskDataSourceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDataSourceManager.swift; sourceTree = "<group>"; };
+		250F0F0A1CF2BB960095DDB1 /* DayChangeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayChangeManager.swift; sourceTree = "<group>"; };
 		251D215F1CE9A39E00A5AC6D /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = Carthage/Build/iOS/DZNEmptyDataSet.framework; sourceTree = "<group>"; };
 		251D21611CEAE1A000A5AC6D /* TimerViewControllerFor4s.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewControllerFor4s.swift; sourceTree = "<group>"; };
 		2527DA7D1CE883B4002F17B2 /* LastDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastDay.swift; sourceTree = "<group>"; };
@@ -63,7 +66,6 @@
 		255E53ED1CD723EB0029E83A /* TaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		255E53EF1CD7295B0029E83A /* TaskCellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCellData.swift; sourceTree = "<group>"; };
 		259169A61CE01C6C005D7386 /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
-		259169A81CE01D4E005D7386 /* PercentBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PercentBarView.swift; sourceTree = "<group>"; };
 		259169B31CE02831005D7386 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		259169B61CE0283D005D7386 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		25916A0A1CE07E2B005D7386 /* TaskDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDataSource.swift; sourceTree = "<group>"; };
@@ -89,13 +91,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2527DA761CE84EDB002F17B2 /* notUsed */ = {
+		250F0F031CF2BAC10095DDB1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				251D215D1CE95C2300A5AC6D /* TimerInfoForEnteringBackground.swift */,
-				259169A81CE01D4E005D7386 /* PercentBarView.swift */,
+				250F0F061CF2BB0E0095DDB1 /* TaskCellDataManager.swift */,
+				250F0F081CF2BB4F0095DDB1 /* TaskDataSourceManager.swift */,
+				2527DA7D1CE883B4002F17B2 /* LastDay.swift */,
+				250F0F0A1CF2BB960095DDB1 /* DayChangeManager.swift */,
+				255E53EF1CD7295B0029E83A /* TaskCellData.swift */,
+				25916A0A1CE07E2B005D7386 /* TaskDataSource.swift */,
 			);
-			name = notUsed;
+			name = Model;
+			sourceTree = "<group>";
+		};
+		250F0F041CF2BACA0095DDB1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				255E53D71CD718350029E83A /* TaskListViewController.swift */,
+				250783541CDCC84800485CD5 /* CreateNewTaskViewController.swift */,
+				25D5F5001CE5A96C00A0A8F6 /* EditTaskViewController.swift */,
+				259169A61CE01C6C005D7386 /* TimerViewController.swift */,
+				251D21611CEAE1A000A5AC6D /* TimerViewControllerFor4s.swift */,
+				25D5F5021CE5D36C00A0A8F6 /* DataSourceListViewController.swift */,
+				25D5F5041CE5D74300A0A8F6 /* DisplayTaskDataViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		250F0F051CF2BADF0095DDB1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				255E53ED1CD723EB0029E83A /* TaskCell.swift */,
+				255E53DB1CD718350029E83A /* Main.storyboard */,
+				255E53E01CD718350029E83A /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		250F0F0C1CF2BC220095DDB1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				255E53E31CD718350029E83A /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		255E53C91CD718350029E83A = {
@@ -123,19 +161,12 @@
 			isa = PBXGroup;
 			children = (
 				255E53D51CD718350029E83A /* AppDelegate.swift */,
-				255E53D71CD718350029E83A /* TaskListViewController.swift */,
-				259169A61CE01C6C005D7386 /* TimerViewController.swift */,
-				251D21611CEAE1A000A5AC6D /* TimerViewControllerFor4s.swift */,
-				250783541CDCC84800485CD5 /* CreateNewTaskViewController.swift */,
-				25D5F5001CE5A96C00A0A8F6 /* EditTaskViewController.swift */,
-				25D5F5021CE5D36C00A0A8F6 /* DataSourceListViewController.swift */,
-				25D5F5041CE5D74300A0A8F6 /* DisplayTaskDataViewController.swift */,
+				250F0F031CF2BAC10095DDB1 /* Model */,
+				250F0F051CF2BADF0095DDB1 /* View */,
+				250F0F041CF2BACA0095DDB1 /* Controller */,
+				250F0F0C1CF2BC220095DDB1 /* Supporting Files */,
 				25D5F52C1CE6BFD400A0A8F6 /* originalClass */,
 				255E53DE1CD718350029E83A /* Assets.xcassets */,
-				255E53DB1CD718350029E83A /* Main.storyboard */,
-				255E53E01CD718350029E83A /* LaunchScreen.storyboard */,
-				255E53E31CD718350029E83A /* Info.plist */,
-				2527DA761CE84EDB002F17B2 /* notUsed */,
 			);
 			path = TickStack;
 			sourceTree = "<group>";
@@ -143,10 +174,6 @@
 		25D5F52C1CE6BFD400A0A8F6 /* originalClass */ = {
 			isa = PBXGroup;
 			children = (
-				2527DA7D1CE883B4002F17B2 /* LastDay.swift */,
-				255E53ED1CD723EB0029E83A /* TaskCell.swift */,
-				25916A0A1CE07E2B005D7386 /* TaskDataSource.swift */,
-				255E53EF1CD7295B0029E83A /* TaskCellData.swift */,
 			);
 			name = originalClass;
 			sourceTree = "<group>";
@@ -247,11 +274,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				255E53F01CD7295B0029E83A /* TaskCellData.swift in Sources */,
+				250F0F071CF2BB0E0095DDB1 /* TaskCellDataManager.swift in Sources */,
 				25D5F5031CE5D36C00A0A8F6 /* DataSourceListViewController.swift in Sources */,
 				255E53EE1CD723EB0029E83A /* TaskCell.swift in Sources */,
 				259169A71CE01C6C005D7386 /* TimerViewController.swift in Sources */,
 				2527DA7E1CE883B4002F17B2 /* LastDay.swift in Sources */,
-				259169A91CE01D4E005D7386 /* PercentBarView.swift in Sources */,
 				255E53D61CD718350029E83A /* AppDelegate.swift in Sources */,
 				251D21621CEAE1A000A5AC6D /* TimerViewControllerFor4s.swift in Sources */,
 				255E53D81CD718350029E83A /* TaskListViewController.swift in Sources */,
@@ -259,7 +286,8 @@
 				250783551CDCC84800485CD5 /* CreateNewTaskViewController.swift in Sources */,
 				25D5F5051CE5D74300A0A8F6 /* DisplayTaskDataViewController.swift in Sources */,
 				25916A0B1CE07E2B005D7386 /* TaskDataSource.swift in Sources */,
-				251D215E1CE95C2300A5AC6D /* TimerInfoForEnteringBackground.swift in Sources */,
+				250F0F0B1CF2BB960095DDB1 /* DayChangeManager.swift in Sources */,
+				250F0F091CF2BB4F0095DDB1 /* TaskDataSourceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

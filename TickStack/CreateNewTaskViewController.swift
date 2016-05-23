@@ -8,8 +8,6 @@
 
 
 import UIKit
-import RealmSwift
-
 
 class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
@@ -24,8 +22,11 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
     //表示している時間
     var selectedMinute: Int = 0
     
+    //Modelを格納
+    var taskCellDataManager = TaskCellDataManager.sharedInstance
+    var taskDataSourceManager = TaskDataSourceManager.sharedInstance
     
-    //最初の処理------------------------------------------------------
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,7 +55,11 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
     }
     
     
-    //Pickerのプロトコル------------------------------------------------------
+    
+    
+    
+    //MARK: - Picker
+    
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         var number: Int!
         if pickerView.tag == 1{
@@ -65,6 +70,8 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int{
         return 1
     }
+    
+    //表示文字列を返す
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?{
         var title: String!
         if pickerView.tag == 1{
@@ -87,34 +94,40 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
     }
     
     
-    //textFieldプロトコル------------------------------------------------------
+    
+    
+    
+    //MARK: - textField
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         newTaskNameTextField.resignFirstResponder()
         return true
     }
     
-    //ページ遷移------------------------------------------------------
+    
+    
+    
+    
+    //MARK: - Segue
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "backToTaskListFromCreateTaskSegue"{
             
-            //新しいTaskCellData
-            let newTaskCellData = TaskCellData()
-            newTaskCellData.taskName = newTaskNameTextField.text!
-            newTaskCellData.taskGoalMinute = Int(timeTextField.text!)!
-            //新しいtaskDataSource
-            let newTaskDataSource = TaskDataSource()
-            newTaskDataSource.taskName = newTaskNameTextField.text!
-            newTaskDataSource.firstDay = NSDate()
+            //移動する際に新しいタスクをtaskCellDataとtaskDataSourceの両方に登録する
+            let newTaskName: String = newTaskNameTextField.text!
+            let taskGoalMinute: Int = Int(timeTextField.text!)!
             
-            try! realm.write({
-                taskCellDataList.list.append(newTaskCellData)
-                taskDataSourceList.list.append(newTaskDataSource)
-            })
+            taskCellDataManager.add(newTaskName, newTaskGoalMinute: taskGoalMinute)
+            taskDataSourceManager.add(newTaskName, firstDate: NSDate())
         }
     }
     
     
-    //ボタンイベント------------------------------------------------------
+    
+    
+    
+    //MARK: - IBAction
+    
     @IBAction func tapDownCreateBtn(sender: UIButton) {
         createBtn.backgroundColor = UIColor.getMainGreen()
     }
@@ -134,9 +147,11 @@ class CreateNewTaskViewController: UIViewController, UIPickerViewDataSource, UIP
             displayAlert(3)
             return
         }
+        
+        //名前がかぶっていたらエラーを返す
         var isNewTask: Bool = true
-        taskCellDataList.list.forEach{(a)->Void in
-            if a.taskName == newTaskNameTextField.text!{
+        taskCellDataManager.taskCellDataList.list.forEach{(taskCellData)->Void in
+            if taskCellData.taskName == newTaskNameTextField.text!{
                 displayAlert(4)
                 isNewTask = false
             }

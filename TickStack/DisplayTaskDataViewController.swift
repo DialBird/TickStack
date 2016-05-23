@@ -19,11 +19,14 @@ class DisplayTaskDataViewController: UIViewController {
     @IBOutlet weak var totalDevoteDateTextLabel: UILabel!
     @IBOutlet weak var totalSuccessDateTextLabel: UILabel!
     
-    //最初の処理------------------------------------------------------
+    //モデルの格納
+    var taskDataSourceManager = TaskDataSourceManager.sharedInstance
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let taskDataSource = taskDataSourceList.list[selectedTaskIndex]
+        let taskDataSource = taskDataSourceManager.taskDataSourceList.list[selectedTaskIndex]
         
         //タイトルを変更
         self.title = "\(taskDataSource.taskName)のデータ"
@@ -45,5 +48,5 @@ class DisplayTaskDataViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-
+    
 }
