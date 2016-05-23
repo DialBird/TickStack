@@ -21,6 +21,9 @@ class DayChangeManager: NSObject {
     let realm = try! Realm()
     
     
+    
+    
+    
     //MARK: - method
     
     //もしも前に登録したLastDayオブジェクトがなければ初期化したものを保存する

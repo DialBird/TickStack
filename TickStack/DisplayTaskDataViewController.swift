@@ -22,6 +22,7 @@ class DisplayTaskDataViewController: UIViewController {
     //モデルの格納
     var taskDataSourceManager = TaskDataSourceManager.sharedInstance
     var dayChangeManager = DayChangeManager.sharedInstance
+    var timerManager = TimerManager.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,7 @@ class DisplayTaskDataViewController: UIViewController {
         self.title = "\(taskDataSource.taskName)のデータ"
         
         //そう累計時間
-        let time = convertSecondIntoTime(taskDataSource.stockedTime)
+        let time = timerManager.convertSecondIntoTime(taskDataSource.stockedTime)
         totalStockedTimeTextLavel.text = "\(time.hour)時間\(time.minute)分\(time.second)秒"
         
         //開始日

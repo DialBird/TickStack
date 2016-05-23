@@ -16,6 +16,9 @@ class TaskCell: UITableViewCell {
     @IBOutlet weak var taskRestTimeLabel: UILabel!
     @IBOutlet weak var clearIconImageView: UIImageView!
     
+    //modelの格納
+    var timerManager = TimerManager.sharedInstance
+    
     
     //最初からあった関数------------------------------------------------------
     override func awakeFromNib() {
@@ -36,8 +39,8 @@ class TaskCell: UITableViewCell {
             taskRestTimeLabel.text = "本日の目標達成！"
             clearIconImageView.alpha = 1
         }else{
-            let time:(hour: Int, minute: Int, second: Int) = convertSecondIntoTime(taskData.getRestSecond())
-            taskRestTimeLabel.text = "残り　\(convertTimeIntoString(time.hour, minute: time.minute, second: time.second))"
+            let time:(hour: Int, minute: Int, second: Int) = timerManager.convertSecondIntoTime(taskData.getRestSecond())
+            taskRestTimeLabel.text = "残り　\(timerManager.convertTimeIntoString(time.hour, minute: time.minute, second: time.second))"
             clearIconImageView.alpha = 0
         }
     }

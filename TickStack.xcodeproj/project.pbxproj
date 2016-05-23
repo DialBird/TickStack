@@ -12,6 +12,7 @@
 		250F0F0B1CF2BB960095DDB1 /* DayChangeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250F0F0A1CF2BB960095DDB1 /* DayChangeManager.swift */; };
 		250F0F0E1CF2C6710095DDB1 /* CreateOrEditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250F0F0D1CF2C6710095DDB1 /* CreateOrEditTaskViewController.swift */; };
 		250F0F101CF2E0AA0095DDB1 /* CustomMainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250F0F0F1CF2E0AA0095DDB1 /* CustomMainButton.swift */; };
+		250F0F121CF2EB2C0095DDB1 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250F0F111CF2EB2C0095DDB1 /* TimerManager.swift */; };
 		251D21601CE9A39E00A5AC6D /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 251D215F1CE9A39E00A5AC6D /* DZNEmptyDataSet.framework */; };
 		251D21621CEAE1A000A5AC6D /* TimerViewControllerFor4s.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251D21611CEAE1A000A5AC6D /* TimerViewControllerFor4s.swift */; };
 		2527DA7E1CE883B4002F17B2 /* LastDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2527DA7D1CE883B4002F17B2 /* LastDay.swift */; };
@@ -54,6 +55,7 @@
 		250F0F0A1CF2BB960095DDB1 /* DayChangeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayChangeManager.swift; sourceTree = "<group>"; };
 		250F0F0D1CF2C6710095DDB1 /* CreateOrEditTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateOrEditTaskViewController.swift; sourceTree = "<group>"; };
 		250F0F0F1CF2E0AA0095DDB1 /* CustomMainButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMainButton.swift; sourceTree = "<group>"; };
+		250F0F111CF2EB2C0095DDB1 /* TimerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		251D215F1CE9A39E00A5AC6D /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = Carthage/Build/iOS/DZNEmptyDataSet.framework; sourceTree = "<group>"; };
 		251D21611CEAE1A000A5AC6D /* TimerViewControllerFor4s.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewControllerFor4s.swift; sourceTree = "<group>"; };
 		2527DA7D1CE883B4002F17B2 /* LastDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastDay.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			children = (
 				250F0F061CF2BB0E0095DDB1 /* TaskCellDataManager.swift */,
 				250F0F081CF2BB4F0095DDB1 /* TaskDataSourceManager.swift */,
+				250F0F111CF2EB2C0095DDB1 /* TimerManager.swift */,
 				2527DA7D1CE883B4002F17B2 /* LastDay.swift */,
 				250F0F0A1CF2BB960095DDB1 /* DayChangeManager.swift */,
 				255E53EF1CD7295B0029E83A /* TaskCellData.swift */,
@@ -274,6 +277,7 @@
 				255E53D61CD718350029E83A /* AppDelegate.swift in Sources */,
 				251D21621CEAE1A000A5AC6D /* TimerViewControllerFor4s.swift in Sources */,
 				250F0F101CF2E0AA0095DDB1 /* CustomMainButton.swift in Sources */,
+				250F0F121CF2EB2C0095DDB1 /* TimerManager.swift in Sources */,
 				255E53D81CD718350029E83A /* TaskListViewController.swift in Sources */,
 				25D5F5051CE5D74300A0A8F6 /* DisplayTaskDataViewController.swift in Sources */,
 				250F0F0E1CF2C6710095DDB1 /* CreateOrEditTaskViewController.swift in Sources */,

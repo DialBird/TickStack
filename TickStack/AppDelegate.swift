@@ -142,35 +142,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 //秒から時間と分へと換算する
-func convertSecondIntoTime(second: Int) -> (hour: Int, minute: Int, second: Int){
-    if second <= 0 {return (0,0,0)}
-    let hour: Int = second/3600
-    let minute: Int = (second - hour*3600)/60
-    let second: Int = second - hour*3600 - minute*60
-    return (hour,minute,second)
-}
+//func convertSecondIntoTime(second: Int) -> (hour: Int, minute: Int, second: Int){
+//    if second <= 0 {return (0,0,0)}
+//    let hour: Int = second/3600
+//    let minute: Int = (second - hour*3600)/60
+//    let second: Int = second - hour*3600 - minute*60
+//    return (hour,minute,second)
+//}
 
 //時間をタイマー風のフォーマットにして返す
-func convertTimeIntoString(hour: Int, minute: Int, second: Int)->String{
-    return "\(String(format: "%02d",hour)):\(String(format: "%02d",minute)):\(String(format: "%02d",second))"
-}
-
-//NSDateを年月日に変更して文字列にする
-//func convertNSDateIntoCalenderParts(date: NSDate)->(year: Int, month: Int, day: Int){
-//    let cal = NSCalendar(identifier: NSCalendarIdentifierGregorian)
-//    let year: Int = cal!.component(.Year, fromDate: date)
-//    let month: Int = cal!.component(.Month, fromDate: date)
-//    let day: Int = cal!.component(.Day, fromDate: date)
-//    return (year,month,day)
+//func convertTimeIntoString(hour: Int, minute: Int, second: Int)->String{
+//    return "\(String(format: "%02d",hour)):\(String(format: "%02d",minute)):\(String(format: "%02d",second))"
 //}
 
-
-//func convertNSDateIntoCalenderString(date: NSDate)->String{
-//    let calendarParts: (year: Int, month: Int, day: Int) = convertNSDateIntoCalenderParts(date)
-//    let year: Int = calendarParts.year
-//    let month: Int = calendarParts.month
-//    let day: Int = calendarParts.day
-//    return "\(year)年\(month)月\(day)日"
-//}
 
 

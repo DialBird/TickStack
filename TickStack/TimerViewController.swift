@@ -20,21 +20,13 @@ class TimerViewController: UIViewController {
     //前のページから渡ってくるタスクのインデックス
     var selectedTaskIndex: Int!
     
-    //このタイマーを開始する前の時点での残り時間（update関数を発動するたびにこの値を必要とするから）
-    var originalRestSecond: Int!
-    
-    //タイマーの軌道に必要な変数
-    var timer = NSTimer()
+    //timerが動いているかどうか
     var timerRunning: Bool = false
-    var counter: Double = 0
-    let timerInterval: Double = 0.1
-    
-    //バックグラウンドに入った場合にその瞬間の時間が記録される
-    var lastMoment: NSDate?
     
     //Modelを格納
     var taskCellDataManager = TaskCellDataManager.sharedInstance
     var taskDataSourceManager = TaskDataSourceManager.sharedInstance
+    var timerManager = TimerManager.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,9 +37,8 @@ class TimerViewController: UIViewController {
         taskNameTextLabel.text = taskCellData.taskName
         
         //残り時間の表示
-        originalRestSecond = taskCellData.getRestSecond()
-        let restTime:(hour: Int, minute: Int, second: Int) = convertSecondIntoTime(originalRestSecond)
-        restTimeLabel.text = convertTimeIntoString(restTime.hour, minute: restTime.minute, second: restTime.second)
+        timerManager.resetCounter()
+        timerManager.setOriginalRestSecond(taskCellData.getRestSecond())
         
         //ボタンの修飾
         playPauseBtn.layer.cornerRadius = playPauseBtn.bounds.width/2
@@ -69,80 +60,32 @@ class TimerViewController: UIViewController {
     //MARK: - lifeSycle
     
     override func viewWillAppear(animated: Bool) {
-        timerOn()
+        timerRunning = true
+        timerManager.timerOn()
         
-        //バックグラウンドに入ったか、バックグラウンドから戻ったかの通知を受け取る(タイマーはバックグラウンドでも勝手に動いてくれる？)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.enterBackground), name: "applicationWillResignActive", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.enterForeground), name: "applicationDidBecomeActive", object: nil)
+        timerManager.addObserver(self, forKeyPath: "currentTimeStringInTimerFormat", options: .New, context: nil)
+        timerManager.addObserver(self, forKeyPath: "restTimeStringInTimerFormat", options: .New, context: nil)
     }
     override func viewWillDisappear(animated: Bool) {
-        timerOff()
-        
-        //通知オブサーバーを削除
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    
-    //オブサーバーによって実行される関数
-    func enterBackground()->Void{
-        if timerRunning{
-            timerOff()
-            lastMoment = NSDate()
-        }
-    }
-    
-    func enterForeground()->Void{
-        if let lastMoment = lastMoment{
-            let secondsSinceLastMoment: Double = NSDate().timeIntervalSinceDate(lastMoment)
-            counter += secondsSinceLastMoment
-            timerOn()
-            self.lastMoment = nil
-        }
-    }
-    
-    
-    
-    
-    
-    //MARK: - timer
-    
-    func timerOn()->Void{
-        timerRunning = true
-        timer = NSTimer.scheduledTimerWithTimeInterval(timerInterval, target: self, selector: #selector(TimerViewController.update), userInfo: nil, repeats: true)
-    }
-    func timerOff()->Void{
         timerRunning = false
-        timer.invalidate()
+        timerManager.timerOff()
+        
+        timerManager.removeObserver(self, forKeyPath: "currentTimeStringInTimerFormat")
+        timerManager.removeObserver(self, forKeyPath: "restTimeStringInTimerFormat")
     }
     
-    //タイマーで更新される関数
-    func update(){
-        
-        //カウンターにインターバル分追加
-        counter += timerInterval
-        let nowSecond: Int = Int(counter)
-        
-        //現在の残り時間を計算
-        let newRestSecond: Int = originalRestSecond - nowSecond
-        
-        //経過時間
-        let passTime:(hour: Int, minute: Int, second: Int) = convertSecondIntoTime(nowSecond)
-        currentTimerLabel.text = convertTimeIntoString(passTime.hour, minute: passTime.minute, second: passTime.second)
-        
-        //残り時間
-        let restTime:(hour: Int, minute: Int, second: Int) = convertSecondIntoTime(newRestSecond)
-        restTimeLabel.text = convertTimeIntoString(restTime.hour, minute:restTime.minute, second:restTime.second)
-    }
     
     
     //ボタンイベント------------------------------------------------------
-    @IBAction func tapDownPlayPauseBtn(sender: UIButton) {}
     @IBAction func tapUpPlayPauseBtn(sender: UIButton) {
         if timerRunning{
-            timerOff()
+            timerRunning = false
+            timerManager.timerOff()
             playPauseBtn.layer.borderColor = UIColor.getStrongGreen().CGColor
             playPauseBtn.setImage(UIImage(named: "Play Filled-50"), forState: .Normal)
         }else{
-            timerOn()
+            timerRunning = true
+            timerManager.timerOn()
             playPauseBtn.layer.borderColor = UIColor.getStrongPink().CGColor
             playPauseBtn.setImage(UIImage(named: "Pause Filled-50"), forState: .Normal)
         }
@@ -152,9 +95,24 @@ class TimerViewController: UIViewController {
     //画面遷移------------------------------------------------------
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "backToTaskListFromTimerSegue"{
+            //タイマーを停止する
+            timerManager.timerOff()
+            
             //時間を更新する
-            taskCellDataManager.stockTimeToSpecificTask(selectedTaskIndex, stockSeconds: Int(counter))
-            taskDataSourceManager.stockTimeToSpecificTask(selectedTaskIndex, stockSeconds: Int(counter))
+            let stockSeconds: Int = timerManager.getStockedSeconds()
+            taskCellDataManager.stockTimeToSpecificTask(selectedTaskIndex, stockSeconds: stockSeconds)
+            taskDataSourceManager.stockTimeToSpecificTask(selectedTaskIndex, stockSeconds: stockSeconds)
+        }
+    }
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        if keyPath == "currentTimeStringInTimerFormat"{
+            //経過時間を更新
+            currentTimerLabel.text = timerManager.currentTimeStringInTimerFormat
+        }
+        if keyPath == "restTimeStringInTimerFormat"{
+            //残り時間を更新
+            restTimeLabel.text = timerManager.restTimeStringInTimerFormat
         }
     }
 }

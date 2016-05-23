@@ -202,7 +202,6 @@
                                 <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="Button" image="Pause Filled-50"/>
                                 <connections>
-                                    <action selector="tapDownPlayPauseBtn:" destination="cXd-fF-Z9b" eventType="touchDown" id="Luf-kn-ncl"/>
                                     <action selector="tapUpPlayPauseBtn:" destination="cXd-fF-Z9b" eventType="touchUpInside" id="tDh-hn-fuU"/>
                                 </connections>
                             </button>
@@ -548,7 +547,6 @@
                                 <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="Button" image="Pause Filled-30"/>
                                 <connections>
-                                    <action selector="tapDownPlayPauseBtn:" destination="eU7-St-tEu" eventType="touchDown" id="M9f-v5-Yta"/>
                                     <action selector="tapUpPlayPauseBtn:" destination="eU7-St-tEu" eventType="touchUpInside" id="7qt-hj-OpV"/>
                                 </connections>
                             </button>
