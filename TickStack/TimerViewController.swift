@@ -59,10 +59,6 @@ class TimerViewController: UIViewController {
         finishBtn.layer.borderColor = UIColor.getStrongGreen().CGColor
         finishBtn.layer.cornerRadius = finishBtn.bounds.height/2
         
-        //バックグラウンドに入ったか、バックグラウンドから戻ったかの通知を受け取る(タイマーはバックグラウンドでも勝手に動いてくれる？)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.enterBackground), name: "applicationWillResignActive", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.enterForeground), name: "applicationDidBecomeActive", object: nil)
-        
         //ナビゲーションバーの色を決定
         self.navigationController?.navigationBar.barTintColor = UIColor.getMainGreen()
     }
@@ -74,9 +70,16 @@ class TimerViewController: UIViewController {
     //画面のライフサイクル関係------------------------------------------------------
     override func viewWillAppear(animated: Bool) {
         timerOn()
+        
+        //バックグラウンドに入ったか、バックグラウンドから戻ったかの通知を受け取る(タイマーはバックグラウンドでも勝手に動いてくれる？)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.enterBackground), name: "applicationWillResignActive", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.enterForeground), name: "applicationDidBecomeActive", object: nil)
     }
     override func viewWillDisappear(animated: Bool) {
         timerOff()
+        
+        //通知オブサーバーを削除
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     

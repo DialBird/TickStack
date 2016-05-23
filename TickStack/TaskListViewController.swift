@@ -59,8 +59,8 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewWillAppear(animated: Bool) {
         
         //監視対象の追加
-        //taskCellDataListとtaskDataSourceListは基本同時に変更されるので、どちらか片方だけ監視していればいい
-        taskCellDataManager.addObserver(self, forKeyPath: "taskCellDataList", options: .New, context: nil)
+        //taskCellDataManagerから送られてくる通知を登録（基本taskCellDataListとtaskDataSourceListは基本同時に変更されるので、どちらか片方だけ監視していればいい)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TaskListViewController.updateTable), name: "taskDeleted", object: nil)
         
         //本日の日付の表示
         let calendarParts: (year: Int, month: Int, day: Int) = convertNSDateIntoCalenderParts(NSDate())
@@ -87,7 +87,7 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        taskCellDataManager.removeObserver(self, forKeyPath: "taskCellDataList")
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     
@@ -97,10 +97,11 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     //MARK: - Observer
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        
+        print("yey")
         if keyPath == "taskCellDataList"{
             updateTable()
         }
+        
     }
     
     //テーブルをアップロードする

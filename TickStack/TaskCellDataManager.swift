@@ -71,6 +71,7 @@ class TaskCellDataManager: NSObject {
         try! realm.write({
             taskCellDataList.list.removeAtIndex(index)
         })
+        NSNotificationCenter.defaultCenter().postNotificationName("taskDeleted", object: nil)
     }
     
     //taskCellDataListをリセットする（日にちが変わった時に発動）
