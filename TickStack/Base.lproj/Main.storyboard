@@ -606,7 +606,7 @@
                         <outlet property="finishBtn" destination="XMT-hA-g24" id="7Cm-Jp-5lJ"/>
                         <outlet property="playPauseBtn" destination="Agq-yn-ZOe" id="j12-2O-BHW"/>
                         <outlet property="restTimeLabel" destination="NNd-4a-4mZ" id="apG-DT-SdE"/>
-                        <outlet property="taskNameTextLabel" destination="9I3-m9-CU7" id="5yw-pO-Dxl"/>
+                        <outlet property="taskNameTextLabel" destination="9I3-m9-CU7" id="eme-WZ-Qwh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6RH-Vz-tGd" userLabel="First Responder" sceneMemberID="firstResponder"/>

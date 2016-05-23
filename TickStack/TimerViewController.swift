@@ -63,6 +63,7 @@ class TimerViewController: UIViewController {
         timerRunning = true
         timerManager.timerOn()
         
+        //両方につけておかないと、変わるタイミングがずれてしまう
         timerManager.addObserver(self, forKeyPath: "currentTimeStringInTimerFormat", options: .New, context: nil)
         timerManager.addObserver(self, forKeyPath: "restTimeStringInTimerFormat", options: .New, context: nil)
     }
@@ -76,7 +77,10 @@ class TimerViewController: UIViewController {
     
     
     
-    //ボタンイベント------------------------------------------------------
+    
+    
+    //MARK: IBAction
+    
     @IBAction func tapUpPlayPauseBtn(sender: UIButton) {
         if timerRunning{
             timerRunning = false
@@ -92,7 +96,11 @@ class TimerViewController: UIViewController {
     }
     
     
-    //画面遷移------------------------------------------------------
+    
+    
+    
+    //MARK: - Segue
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "backToTaskListFromTimerSegue"{
             //タイマーを停止する
@@ -105,6 +113,11 @@ class TimerViewController: UIViewController {
         }
     }
     
+    
+    
+    
+    
+    //MARK: - Observer
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if keyPath == "currentTimeStringInTimerFormat"{
             //経過時間を更新
