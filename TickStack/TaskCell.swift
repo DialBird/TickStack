@@ -44,6 +44,4 @@ class TaskCell: UITableViewCell {
             clearIconImageView.alpha = 0
         }
     }
-    
-    
 }
