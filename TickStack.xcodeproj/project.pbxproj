@@ -165,17 +165,9 @@
 				250F0F051CF2BADF0095DDB1 /* View */,
 				250F0F041CF2BACA0095DDB1 /* Controller */,
 				250F0F0C1CF2BC220095DDB1 /* Supporting Files */,
-				25D5F52C1CE6BFD400A0A8F6 /* originalClass */,
 				255E53DE1CD718350029E83A /* Assets.xcassets */,
 			);
 			path = TickStack;
-			sourceTree = "<group>";
-		};
-		25D5F52C1CE6BFD400A0A8F6 /* originalClass */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = originalClass;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

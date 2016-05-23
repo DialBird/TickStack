@@ -52,10 +52,8 @@ class TaskDataSourceManager: NSObject {
         
         try! realm.write({
             let target: TaskDataSource = taskDataSourceList.list[sourceIndex]
-            try! realm.write({
-                taskDataSourceList.list.removeAtIndex(sourceIndex)
-                taskDataSourceList.list.insert(target, atIndex: destIndex)
-            })
+            taskDataSourceList.list.removeAtIndex(sourceIndex)
+            taskDataSourceList.list.insert(target, atIndex: destIndex)
         })
     }
     

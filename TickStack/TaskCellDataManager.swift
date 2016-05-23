@@ -52,10 +52,8 @@ class TaskCellDataManager: NSObject {
         
         try! realm.write({
             let target: TaskCellData = taskCellDataList.list[sourceIndex]
-            try! realm.write({
-                taskCellDataList.list.removeAtIndex(sourceIndex)
-                taskCellDataList.list.insert(target, atIndex: destIndex)
-            })
+            taskCellDataList.list.removeAtIndex(sourceIndex)
+            taskCellDataList.list.insert(target, atIndex: destIndex)
         })
     }
     
