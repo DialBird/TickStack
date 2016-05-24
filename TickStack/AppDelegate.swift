@@ -74,6 +74,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         TaskDataSourceManager.sharedInstance.checkStoredDataExists()
         
         
+        if let notification = launchOptions?[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification,let userInfo = notification.userInfo{
+            application.applicationIconBadgeNumber = 0
+            application.cancelLocalNotification(notification)
+        }
+        //復帰に関係なくバッジが0じゃなければ0にする
+        if application.applicationIconBadgeNumber != 0{
+            application.applicationIconBadgeNumber = 0
+        }
+        
         
         //デモ用------------------------------------------------------
         //        try! realm.write({
@@ -119,10 +128,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        application.cancelAllLocalNotifications()
+        let notification = UILocalNotification()
+        notification.alertAction = "アプリを開く"
+        notification.alertBody = "やあけいすけ"
+        notification.fireDate = NSDate(timeIntervalSinceNow: 3)
+        notification.soundName = UILocalNotificationDefaultSoundName
+        notification.applicationIconBadgeNumber = 999999999
+        notification.userInfo = ["notifyID": "keisuke"]
+//        application.scheduleLocalNotification(notification)
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        if application.applicationIconBadgeNumber != 0{
+            application.applicationIconBadgeNumber = 0
+            print("application\(application.applicationIconBadgeNumber)")
+        }
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
@@ -133,27 +155,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        if application.applicationState != .Active{
+            //バッジを０にする
+            application.applicationIconBadgeNumber = 0
+            //通知領域から削除する
+            application.cancelLocalNotification(notification)
+        }else{
+             //active時に通知が来たときはそのままバッジを0に戻す
+            if application.applicationIconBadgeNumber != 0{
+                application.applicationIconBadgeNumber = 0
+                application.cancelLocalNotification(notification)
+            }
+        }
+    }
 }
 
-
-
-
-//共用関数------------------------------------------------------
-
-
-//秒から時間と分へと換算する
-//func convertSecondIntoTime(second: Int) -> (hour: Int, minute: Int, second: Int){
-//    if second <= 0 {return (0,0,0)}
-//    let hour: Int = second/3600
-//    let minute: Int = (second - hour*3600)/60
-//    let second: Int = second - hour*3600 - minute*60
-//    return (hour,minute,second)
-//}
-
-//時間をタイマー風のフォーマットにして返す
-//func convertTimeIntoString(hour: Int, minute: Int, second: Int)->String{
-//    return "\(String(format: "%02d",hour)):\(String(format: "%02d",minute)):\(String(format: "%02d",second))"
-//}
 
 
 

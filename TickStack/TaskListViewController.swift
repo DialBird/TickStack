@@ -28,6 +28,7 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     let taskCellDataManager = TaskCellDataManager.sharedInstance
     let taskDataSourceManager = TaskDataSourceManager.sharedInstance
     let dayChangeManager = DayChangeManager.sharedInstance
+//    let notificationManager: NotificationManager = NotificationManager.init()
     
     
     override func viewDidLoad() {
@@ -45,6 +46,8 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
         
         //ナビゲーションバーの色を決定
         self.navigationController?.navigationBar.barTintColor = UIColor.getMainGreen()
+        
+//        notificationManager.setNotification(fireDate: NSDate(timeIntervalSinceNow: 5), timeZone: NSTimeZone.localTimeZone(), repeatInterval: NSCalendarUnit.Minute, alertAction: "Alert Action", alertBody: "Alert Body", applicationIconBadgeNumber: 1, soundName: UILocalNotificationDefaultSoundName)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
