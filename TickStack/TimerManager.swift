@@ -19,6 +19,7 @@ class TimerManager: NSObject {
     
     private var timer = NSTimer()
     private var counter: Double = 0
+    private var _timerRunning: Bool = false
     let timerInterval: Double = 0.1
     
     //最初の時点での残り時間を記録（update関数で毎回使うため）
@@ -27,6 +28,19 @@ class TimerManager: NSObject {
     dynamic var currentTimeStringInTimerFormat: String!
     dynamic var restTimeStringInTimerFormat: String!
     
+    
+    
+    
+    
+    //MARK: - getter setter
+    var timerRunning: Bool{
+        get{
+            return _timerRunning
+        }
+        set(val){
+            _timerRunning = val
+        }
+    }
     
     
     

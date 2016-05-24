@@ -20,9 +20,6 @@ class TimerViewController: UIViewController {
     //前のページから渡ってくるタスクのインデックス
     var selectedTaskIndex: Int!
     
-    //timerが動いているかどうか
-    var timerRunning: Bool = false
-    
     //バックグラウンドに入った場合にその瞬間の時間が記録される
     private var lastMoment: NSDate?
     
@@ -63,7 +60,7 @@ class TimerViewController: UIViewController {
     //MARK: - lifeSycle
     
     override func viewWillAppear(animated: Bool) {
-        timerRunning = true
+        timerManager.timerRunning = true
         timerManager.timerOn()
         
         //バックグラウンドに入った場合の監視
@@ -75,7 +72,7 @@ class TimerViewController: UIViewController {
         timerManager.addObserver(self, forKeyPath: "restTimeStringInTimerFormat", options: .New, context: nil)
     }
     override func viewWillDisappear(animated: Bool) {
-        timerRunning = false
+        timerManager.timerRunning = false
         timerManager.timerOff()
         
         //監視解除
@@ -91,13 +88,13 @@ class TimerViewController: UIViewController {
     //MARK: IBAction
     
     @IBAction func tapUpPlayPauseBtn(sender: UIButton) {
-        if timerRunning{
-            timerRunning = false
+        if timerManager.timerRunning{
+            timerManager.timerRunning = false
             timerManager.timerOff()
             playPauseBtn.layer.borderColor = UIColor.getStrongGreen().CGColor
             playPauseBtn.setImage(UIImage(named: "Play Filled-50"), forState: .Normal)
         }else{
-            timerRunning = true
+            timerManager.timerRunning = true
             timerManager.timerOn()
             playPauseBtn.layer.borderColor = UIColor.getStrongPink().CGColor
             playPauseBtn.setImage(UIImage(named: "Pause Filled-50"), forState: .Normal)
@@ -129,7 +126,8 @@ class TimerViewController: UIViewController {
     //MARK: - Observer
     
     func enterBackground()->Void{
-        if timerRunning{
+        if timerManager.timerRunning{
+            timerManager.timerOff()
             lastMoment = NSDate()
         }
     }
