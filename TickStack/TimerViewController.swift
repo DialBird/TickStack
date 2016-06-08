@@ -49,9 +49,13 @@ class TimerViewController: UIViewController {
         //ナビゲーションバーの色を決定
         self.navigationController?.navigationBar.barTintColor = UIColor.getMainGreen()
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    
+    
     
     
     //MARK: - lifeSycle
@@ -68,6 +72,7 @@ class TimerViewController: UIViewController {
         timerManager.addObserver(self, forKeyPath: "currentTimeStringInTimerFormat", options: .New, context: nil)
         timerManager.addObserver(self, forKeyPath: "restTimeStringInTimerFormat", options: .New, context: nil)
     }
+    
     override func viewWillDisappear(animated: Bool) {
         timerManager.timerRunning = false
         timerManager.timerOff()
