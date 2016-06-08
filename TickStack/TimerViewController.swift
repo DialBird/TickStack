@@ -54,9 +54,6 @@ class TimerViewController: UIViewController {
     }
     
     
-    
-    
-    
     //MARK: - lifeSycle
     
     override func viewWillAppear(animated: Bool) {
